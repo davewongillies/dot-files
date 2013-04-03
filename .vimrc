@@ -11,7 +11,6 @@ Bundle 'gmarik/vundle'
 
 " My Bundles here:
 " original repos on github
-" old powerline
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "honza/snipmate-snippets"
 Bundle "tomtom/tlib_vim"
@@ -47,17 +46,10 @@ Bundle 'tComment'
 filetype plugin on 
 " The following will make Vim load indentation rules and plugins according to the detected filetype.
 if has("autocmd")
-  filetype plugin indent on
+    filetype plugin indent on
+    " Arduino pde file support
+    autocmd BufNewFile,BufRead *.pde setf arduino
 endif
-
-" Arduino pde file support
-autocmd BufNewFile,BufRead *.pde setf arduino
-
-
-"" Pathegen plugin for managing vim script bundles
-"" The plugins can be found in ~/.vim/bundle
-"call pathogen#infect()
-"call pathogen#helptags()
 
 " enables proper mouse support
 set ttyfast
@@ -71,14 +63,19 @@ set colorcolumn=80 " display a vertical coloured column at 80
 set scrolloff=20
 
 " Solarized colour theme
+colorscheme solarized
+let g:solarized_termtrans=1
+
 if has('gui_running')
+    set guifont=Monaco\ For\ Powerline\ 10
     set background=light
+    " Number of horizontal lines on the screen
+    " set lines=60
+    " GUI Option to remove the Toolbar (T)
+    set guioptions-=T
 else
     set background=dark
 endif
-
-colorscheme solarized
-let g:solarized_termtrans=1
 
 " jump to the last position when reopening a file
 if has("autocmd")
@@ -111,24 +108,14 @@ autocmd FileType c setlocal shiftwidth=3 tabstop=3
 " Syntax highlighting
 if has("syntax")
   syntax on
+  let g:syntastic_mode_map = { 'mode': 'active',
+                                 \ 'active_filetypes': ['ruby', 'shell', 'python'],
+                                 \ 'passive_filetypes': [ ] }
+  let g:syntastic_check_on_open=1           " check syntax on file open
+  let g:syntastic_python_checker=['flake8'] " use flake8 for python syntax checking
+  let g:syntastic_python_flake8_args = '--max-line-length=1000'
+  let g:puppet_module_detect=1              " enable puppet module detection
 endif
-
-let g:syntastic_mode_map = { 'mode': 'active',
-                               \ 'active_filetypes': ['ruby', 'shell', 'python'],
-                               \ 'passive_filetypes': [ ] }
-
-" check syntax on file open
-let g:syntastic_check_on_open=1
-let g:syntastic_python_checker=['flake8']
-let g:syntastic_python_flake8_args = '--max-line-length=1000'
-
-" enable puppet module detection
-let g:puppet_module_detect=1
-
-" Some old lines for syntastic
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
 
 " =============== Key Mappings ================
 " ctrl-t movement for tabs
@@ -139,12 +126,15 @@ map <C-t><right> :tabn<cr>
 map <C-t>n :tabnew<cr>
 map <C-t>K :tabclose<cr>
 
-" ctrl-n for NERDTree
+" toggle NERDTree
 map <C-n> :NERDTreeToggle<cr>
-
+" toggle hidden chars
 map <C-l> :set list!<cr>
+" toggle paste mode
 map <C-p> :set paste!<cr>
+" toggle relative/absolute number (numbers.vim)
 map <C-u> :NumbersToggle<cr>
+" toggle between light/dark backgrounds
 map <C-b> :let &background = ( &background == "dark"? "light" : "dark" )<cr>
 
 " Align puppet resource attributes
