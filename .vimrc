@@ -11,23 +11,24 @@ Bundle 'gmarik/vundle'
 
 " My Bundles here:
 " original repos on github
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "honza/snipmate-snippets"
-Bundle "tomtom/tlib_vim"
 Bundle 'Lokaltog/powerline'
+Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'PotatoesMaster/i3-vim-syntax'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'ervandew/supertab'
 Bundle 'garbas/vim-snipmate'
 Bundle 'godlygeek/tabular'
+Bundle 'honza/snipmate-snippets'
 Bundle 'jamessan/vim-gnupg'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'kana/vim-smartinput'
 Bundle 'myusuf3/numbers.vim'
+Bundle 'mv/mv-vim-nagios'
 Bundle 'rodjek/vim-puppet'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'tempire/conque'
+Bundle 'tomtom/tlib_vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-markdown'
@@ -39,6 +40,7 @@ Bundle 'xuhdev/SingleCompile'
 " vim-scripts repos
 Bundle 'Align'
 Bundle 'Gist.vim'
+Bundle 'haproxy'
 Bundle 'matchit.zip'
 Bundle 'tComment'
 
@@ -64,13 +66,13 @@ set scrolloff=20
 
 " Solarized colour theme
 colorscheme solarized
-let g:solarized_termtrans=1
+let g:solarized_termtrans = 1
+let g:solarized_contrast = "high"
+let g:solarized_visibility = "high"
 
 if has('gui_running')
     set guifont=Monaco\ For\ Powerline\ 10
     set background=light
-    " Number of horizontal lines on the screen
-    " set lines=60
     " GUI Option to remove the Toolbar (T)
     set guioptions-=T
 else
@@ -81,7 +83,6 @@ endif
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
-
 
 " ================ Persistent Undo ==================
 " Keep undo history across sessions, by storing in file.
@@ -126,8 +127,6 @@ map <C-t><right> :tabn<cr>
 map <C-t>n :tabnew<cr>
 map <C-t>K :tabclose<cr>
 
-" toggle NERDTree
-map <C-n> :NERDTreeToggle<cr>
 " toggle hidden chars
 map <C-l> :set list!<cr>
 " toggle paste mode
@@ -155,11 +154,9 @@ nmap <C-F10> :SCCompileRun<cr>
 
 " ================== Powerline ========================
 " start powerline
-" python from powerline.ext.vim import source_plugin; source_plugin()
 " set fillchars+=stl:\ ,stlnc:\
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
-" for (old) Powerline (I think)
 set laststatus=2   " Always show the statusline
 set encoding=utf-8 " Necessary to show unicode glyphs
 scriptencoding utf-8
@@ -175,6 +172,18 @@ autocmd BufWritePost .gvimrc so ~/.gvimrc
 set list listchars=trail:.,precedes:«,extends:»,eol:↲,tab:\░\░ 
 
 " ================= NERDTree ==========================
-" Open NERDTree on startup
-autocmd vimenter * NERDTree $PWD
-autocmd vimenter * wincmd w
+if has("NERDTree")
+    " toggle NERDTree
+    map <C-n> :NERDTreeToggle<cr>
+    " Show hidden files *except* the known temp files, system files & VCS files
+    let NERDTreeShowHidden = 1
+ 
+    let NERDTreeIgnore = []
+    for suffix in split(&suffixes, ',')
+        let NERDTreeIgnore += [ escape(suffix, '.~') . '$' ]
+    endfor
+    let NERDTreeIgnore += ['^\.bundle$', '^\.bzr$', '^\.git$', '^\.hg$', '^\.swp$', '^\.svn$', '^\.$', '^\.\.$']
+    " Open NERDTree on startup
+    autocmd vimenter * NERDTree $PWD
+    autocmd vimenter * wincmd w
+endif
