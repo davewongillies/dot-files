@@ -139,6 +139,8 @@ map <C-b> :let &background = ( &background == "dark"? "light" : "dark" )<cr>
 " Align puppet resource attributes
 map <C-a>a :Align =><cr>
 
+nmap <F1> <nop>
+
 " ================= SingleCompile =====================
 nmap <C-F9> :SCCompile<cr>
 nmap <C-F10> :SCCompileRun<cr>
