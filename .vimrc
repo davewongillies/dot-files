@@ -18,7 +18,6 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'ervandew/supertab'
 Bundle 'garbas/vim-snipmate'
 Bundle 'godlygeek/tabular'
-Bundle 'honza/snipmate-snippets'
 Bundle 'jamessan/vim-gnupg'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'kana/vim-smartinput'
@@ -26,6 +25,7 @@ Bundle 'myusuf3/numbers.vim'
 Bundle 'mv/mv-vim-nagios'
 Bundle 'rodjek/vim-puppet'
 Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/snipmate-snippets'
 Bundle 'scrooloose/syntastic'
 Bundle 'tempire/conque'
 Bundle 'tomtom/tlib_vim'
@@ -157,6 +157,7 @@ nmap <C-F10> :SCCompileRun<cr>
 " ================== Powerline ========================
 " start powerline
 " set fillchars+=stl:\ ,stlnc:\
+"
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 set laststatus=2   " Always show the statusline
@@ -179,7 +180,7 @@ if has("NERDTree")
     map <C-n> :NERDTreeToggle<cr>
     " Show hidden files *except* the known temp files, system files & VCS files
     let NERDTreeShowHidden = 1
- 
+
     let NERDTreeIgnore = []
     for suffix in split(&suffixes, ',')
         let NERDTreeIgnore += [ escape(suffix, '.~') . '$' ]
@@ -188,4 +189,5 @@ if has("NERDTree")
     " Open NERDTree on startup
     autocmd vimenter * NERDTree $PWD
     autocmd vimenter * wincmd w
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 endif
