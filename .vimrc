@@ -107,7 +107,7 @@ set tabstop=4
 
 autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd FileType python setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
-autocmd FileType yaml setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
+autocmd FileType yaml setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
 autocmd FileType ruby setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
 
 " ================= Syntastic settings ===============
@@ -121,6 +121,7 @@ if has("syntax")
   let g:syntastic_python_checkers=['flake8'] " use flake8 for python syntax checking
   let g:syntastic_python_flake8_args = '--max-line-length=1000'
   let g:puppet_module_detect=1               " enable puppet module detection
+  let g:syntastic_puppet_puppetlint_args='--no-documentation-check --no-80chars-check'
 endif
 
 " =============== Key Mappings ================
@@ -147,7 +148,7 @@ map <C-a>a :Align =><cr>
 nmap <F1> <nop>
 
 " Airline
-let g:airline_theme='dark'
+let g:airline_theme='powerlineish'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#buffer_min_count = 2
@@ -209,6 +210,11 @@ if has("NERDTree")
         autocmd VimEnter * NERDTree
     endif
 endif
+
+" Can't remember why I've set these
+set hlsearch
+set showcmd
+set smartcase
 
 " vim-session
 let g:session_autosave='no'
