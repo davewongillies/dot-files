@@ -6,25 +6,29 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-" required! 
+" required!
 Bundle 'gmarik/vundle'
 
 " My Bundles here:
 " original repos on github
-Bundle 'Lokaltog/powerline'
+Bundle 'Glench/Vim-Jinja2-Syntax'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'PotatoesMaster/i3-vim-syntax'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'bling/vim-airline'
+Bundle 'edkolev/tmuxline.vim'
 Bundle 'ervandew/supertab'
-Bundle 'garbas/vim-snipmate'
 Bundle 'godlygeek/tabular'
 Bundle 'jamessan/vim-gnupg'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'kana/vim-smartinput'
-Bundle 'myusuf3/numbers.vim'
 Bundle 'mv/mv-vim-nagios'
+Bundle 'myusuf3/numbers.vim'
+Bundle 'rking/ag.vim'
 Bundle 'rodjek/vim-puppet'
 Bundle 'scrooloose/nerdtree'
+Bundle 'SirVer/ultisnips'
+Bundle 'honza/vim-snippets'
 Bundle 'scrooloose/snipmate-snippets'
 Bundle 'scrooloose/syntastic'
 Bundle 'tempire/conque'
@@ -35,7 +39,11 @@ Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tsaleh/vim-tmux'
+Bundle 'xolox/vim-easytags'
+Bundle 'xolox/vim-misc'
+Bundle 'xolox/vim-session'
 Bundle 'xuhdev/SingleCompile'
+Bundle 'gregsexton/gitv'
 
 " vim-scripts repos
 Bundle 'Align'
@@ -102,9 +110,6 @@ autocmd FileType python setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
 autocmd FileType yaml setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
 autocmd FileType ruby setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
 
-" For some reason it has to be 3 for C for Uni
-autocmd FileType c setlocal shiftwidth=3 tabstop=3
-
 " ================= Syntastic settings ===============
 " Syntax highlighting
 if has("syntax")
@@ -112,10 +117,10 @@ if has("syntax")
   let g:syntastic_mode_map = { 'mode': 'active',
                                  \ 'active_filetypes': ['ruby', 'shell', 'python'],
                                  \ 'passive_filetypes': [ ] }
-  let g:syntastic_check_on_open=1           " check syntax on file open
-  let g:syntastic_python_checker=['flake8'] " use flake8 for python syntax checking
+  let g:syntastic_check_on_open=1            " check syntax on file open
+  let g:syntastic_python_checkers=['flake8'] " use flake8 for python syntax checking
   let g:syntastic_python_flake8_args = '--max-line-length=1000'
-  let g:puppet_module_detect=1              " enable puppet module detection
+  let g:puppet_module_detect=1               " enable puppet module detection
 endif
 
 " =============== Key Mappings ================
@@ -141,30 +146,35 @@ map <C-a>a :Align =><cr>
 
 nmap <F1> <nop>
 
-" ================= SingleCompile =====================
-nmap <C-F9> :SCCompile<cr>
-nmap <C-F10> :SCCompileRun<cr>
-"call SingleCompile#SetCompilerTemplate('c', 'gcc', 'GNU C Compiler',
-"             \'gcc', '-ansi -pedantic -Wall -o $(FILE_TITLE)$', l:common_run_command)
-"call SingleCompile#SetOutfile('c', 'gcc', l:common_out_file)
-"call SingleCompile#SetCompilerTemplate('c', 'clang',
-"             \'LLVM C Compiler', 'clang', '-o $(FILE_TITLE)$',
-"             \l:common_run_command)
-"call SingleCompile#SetOutfile('c', 'clang', l:common_out_file)
+" Airline
+let g:airline_theme='dark'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#buffer_min_count = 2
+let g:airline#extensions#tabline#tab_min_count = 2
+let g:airline_powerline_fonts = 1
 
-"call SingleCompile#ChooseCompiler('c', 'clang')
-
-" ================== Powerline ========================
-" start powerline
-" set fillchars+=stl:\ ,stlnc:\
-"
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+" unicode symbols
+" let g:airline_left_sep = '»'
+" let g:airline_left_sep = '▶'
+" let g:airline_right_sep = '«'
+" let g:airline_right_sep = '◀'
+" let g:airline#extensions#tabline#left_sep = '▶'
+" let g:airline#extensions#tabline#left_alt_sep = '»'
+" let g:airline_symbols = {}
+" let g:airline_symbols.linenr = '␊'
+" let g:airline_symbols.linenr = '␤'
+" let g:airline_symbols.linenr = '¶'
+" let g:airline_symbols.branch = '⎇'
+" let g:airline_symbols.paste = 'ρ'
+" let g:airline_symbols.paste = 'Þ'
+" let g:airline_symbols.paste = '∥'
+" let g:airline_symbols.whitespace = 'Ξ'
 
 set laststatus=2   " Always show the statusline
 set encoding=utf-8 " Necessary to show unicode glyphs
 scriptencoding utf-8
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
-let g:Powerline_symbols = 'unicode'
 
 " If we make mods to ~/.vimrc, vim reloads the changes
 autocmd BufWritePost .vimrc so ~/.vimrc
@@ -175,9 +185,9 @@ autocmd BufWritePost .gvimrc so ~/.gvimrc
 set list listchars=trail:.,precedes:«,extends:»,eol:↲,tab:\░\░ 
 
 " ================= NERDTree ==========================
+map <C-n> :NERDTreeToggle<cr>
 if has("NERDTree")
     " toggle NERDTree
-    map <C-n> :NERDTreeToggle<cr>
     " Show hidden files *except* the known temp files, system files & VCS files
     let NERDTreeShowHidden = 1
 
@@ -186,8 +196,19 @@ if has("NERDTree")
         let NERDTreeIgnore += [ escape(suffix, '.~') . '$' ]
     endfor
     let NERDTreeIgnore += ['^\.bundle$', '^\.bzr$', '^\.git$', '^\.hg$', '^\.swp$', '^\.svn$', '^\.$', '^\.\.$']
+
     " Open NERDTree on startup
     autocmd vimenter * NERDTree $PWD
     autocmd vimenter * wincmd w
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+    " Open NERDTree if we open a directory
+    if isdirectory(argv(0))
+        bd
+        autocmd vimenter * exe "cd" argv(0)
+        autocmd VimEnter * NERDTree
+    endif
 endif
+
+" vim-session
+let g:session_autosave='no'
