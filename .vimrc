@@ -22,14 +22,14 @@ Bundle 'godlygeek/tabular'
 Bundle 'jamessan/vim-gnupg'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'kana/vim-smartinput'
-Bundle 'mv/mv-vim-nagios'
+Bundle 'tejr/vim-nagios'
 Bundle 'myusuf3/numbers.vim'
 Bundle 'rking/ag.vim'
 Bundle 'rodjek/vim-puppet'
 Bundle 'scrooloose/nerdtree'
 Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets'
-Bundle 'scrooloose/snipmate-snippets'
+" Bundle 'scrooloose/snipmate-snippets'
 Bundle 'scrooloose/syntastic'
 Bundle 'tempire/conque'
 Bundle 'tomtom/tlib_vim'
@@ -38,12 +38,14 @@ Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-jdaddy'
 Bundle 'tsaleh/vim-tmux'
 Bundle 'xolox/vim-easytags'
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-session'
 Bundle 'xuhdev/SingleCompile'
 Bundle 'gregsexton/gitv'
+Bundle 'ryanss/vim-hackernews'
 
 " vim-scripts repos
 Bundle 'Align'
@@ -51,9 +53,10 @@ Bundle 'Gist.vim'
 Bundle 'haproxy'
 Bundle 'matchit.zip'
 Bundle 'tComment'
+Bundle 'vim-coffee-script'
 
 " ==================== File type =========================
-filetype plugin on 
+filetype plugin on
 " The following will make Vim load indentation rules and plugins according to the detected filetype.
 if has("autocmd")
     filetype plugin indent on
@@ -109,6 +112,8 @@ autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,
 autocmd FileType python setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
 autocmd FileType yaml setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
 autocmd FileType ruby setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
+autocmd FileType php setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
+autocmd FileType coffee setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
 
 " ================= Syntastic settings ===============
 " Syntax highlighting
@@ -121,7 +126,7 @@ if has("syntax")
   let g:syntastic_python_checkers=['flake8'] " use flake8 for python syntax checking
   let g:syntastic_python_flake8_args = '--max-line-length=1000'
   let g:puppet_module_detect=1               " enable puppet module detection
-  let g:syntastic_puppet_puppetlint_args='--no-documentation-check --no-80chars-check'
+  let g:syntastic_puppet_puppetlint_args='--no-documentation-check --no-80chars-check --relative --no-selector_inside_resource-check'
 endif
 
 " =============== Key Mappings ================
@@ -218,3 +223,7 @@ set smartcase
 
 " vim-session
 let g:session_autosave='no'
+
+let g:Gitv_OpenHorizontal = 0
+
+autocmd FileType json,sh,eruby,spec,c,cpp,python,ruby,java,yaml,javascript,html,css,coffee,haml,php,puppet autocmd BufWritePre <buffer> :%s/\s\+$//e
