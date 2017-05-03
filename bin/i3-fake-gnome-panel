@@ -1,0 +1,11 @@
+#!/usr/bin/env python3
+# Written by https://www.reddit.com/u/pcapriotti
+# https://www.reddit.com/r/i3wm/comments/4k8f9h/i3gnome_not_registering_fn_key_events/d8nwmmy/
+
+import dbus
+import dbus.service
+import signal
+
+session = dbus.SessionBus()
+name = dbus.service.BusName("org.gnome.Panel", session)
+signal.pause()
