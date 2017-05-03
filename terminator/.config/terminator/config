@@ -1,4 +1,5 @@
 [global_config]
+  focus = mouse
   title_hide_sizetext = True
 [keybindings]
   help = None
