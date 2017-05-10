@@ -1,59 +1,57 @@
+set shell=/bin/bash
 " Vi non-compatible mode
 set nocompatible               " be iMproved
 filetype off                   " required! Don't know what the hell for though
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
+
 
 " My Bundles here:
 " original repos on github
-Bundle 'Glench/Vim-Jinja2-Syntax'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'PotatoesMaster/i3-vim-syntax'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'bling/vim-airline'
-Bundle 'edkolev/tmuxline.vim'
-Bundle 'ervandew/supertab'
-Bundle 'godlygeek/tabular'
-Bundle 'jamessan/vim-gnupg'
-Bundle 'jistr/vim-nerdtree-tabs'
-Bundle 'kana/vim-smartinput'
-Bundle 'tejr/vim-nagios'
-Bundle 'myusuf3/numbers.vim'
-Bundle 'rking/ag.vim'
-Bundle 'rodjek/vim-puppet'
-Bundle 'scrooloose/nerdtree'
-Bundle 'SirVer/ultisnips'
-Bundle 'honza/vim-snippets'
-" Bundle 'scrooloose/snipmate-snippets'
-Bundle 'scrooloose/syntastic'
-Bundle 'tempire/conque'
-Bundle 'tomtom/tlib_vim'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-git'
-Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-jdaddy'
-Bundle 'tsaleh/vim-tmux'
-Bundle 'xolox/vim-easytags'
-Bundle 'xolox/vim-misc'
-Bundle 'xolox/vim-session'
-Bundle 'xuhdev/SingleCompile'
-Bundle 'gregsexton/gitv'
-Bundle 'ryanss/vim-hackernews'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'PotatoesMaster/i3-vim-syntax'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'edkolev/tmuxline.vim'
+Plugin 'godlygeek/tabular'
+Plugin 'jamessan/vim-gnupg'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'kana/vim-smartinput'
+" Bundle 'tejr/vim-nagios'
+Plugin 'myusuf3/numbers.vim'
+Plugin 'rking/ag.vim'
+Plugin 'rodjek/vim-puppet'
+Plugin 'scrooloose/nerdtree'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'scrooloose/syntastic'
+Plugin 'tomtom/tlib_vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-git'
+Plugin 'tpope/vim-markdown'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-jdaddy'
+Plugin 'tsaleh/vim-tmux'
+" Plugin 'xolox/vim-easytags'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-session'
+Plugin 'xuhdev/SingleCompile'
+Plugin 'gregsexton/gitv'
+Plugin 'Valloric/YouCompleteMe'
 
 " vim-scripts repos
-Bundle 'Align'
-Bundle 'Gist.vim'
-Bundle 'haproxy'
-Bundle 'matchit.zip'
-Bundle 'tComment'
-Bundle 'vim-coffee-script'
+Plugin 'Align'
+Plugin 'Gist.vim'
+Plugin 'matchit.zip'
+Plugin 'tComment'
+
+call vundle#end()            " required
+
 
 " ==================== File type =========================
 filetype plugin on
@@ -66,7 +64,7 @@ endif
 
 " enables proper mouse support
 set ttyfast
-set ttymouse=xterm2
+" set ttymouse=xterm2
 set mouse=a
 set showcmd        " Show (partial) command in status line.
 set number         " Line numbers
@@ -76,7 +74,7 @@ set colorcolumn=80 " display a vertical coloured column at 80
 set scrolloff=20
 
 " Solarized colour theme
-colorscheme solarized
+" colorscheme solarized
 let g:solarized_termtrans = 1
 let g:solarized_contrast = "high"
 let g:solarized_visibility = "high"
@@ -191,30 +189,11 @@ autocmd BufWritePost .gvimrc so ~/.gvimrc
 set list listchars=trail:.,precedes:«,extends:»,eol:↲,tab:\░\░ 
 
 " ================= NERDTree ==========================
+" toggle NERDTree
 map <C-n> :NERDTreeToggle<cr>
-if has("NERDTree")
-    " toggle NERDTree
-    " Show hidden files *except* the known temp files, system files & VCS files
-    let NERDTreeShowHidden = 1
-
-    let NERDTreeIgnore = []
-    for suffix in split(&suffixes, ',')
-        let NERDTreeIgnore += [ escape(suffix, '.~') . '$' ]
-    endfor
-    let NERDTreeIgnore += ['^\.bundle$', '^\.bzr$', '^\.git$', '^\.hg$', '^\.swp$', '^\.svn$', '^\.$', '^\.\.$']
-
-    " Open NERDTree on startup
-    autocmd vimenter * NERDTree $PWD
-    autocmd vimenter * wincmd w
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-    " Open NERDTree if we open a directory
-    if isdirectory(argv(0))
-        bd
-        autocmd vimenter * exe "cd" argv(0)
-        autocmd VimEnter * NERDTree
-    endif
-endif
+let NERDTreeShowHidden = 0
+" Open NERDTree on startup
+let g:nerdtree_tabs_open_on_console_startup=1
 
 " Can't remember why I've set these
 set hlsearch
@@ -227,3 +206,4 @@ let g:session_autosave='no'
 let g:Gitv_OpenHorizontal = 0
 
 autocmd FileType json,sh,eruby,spec,c,cpp,python,ruby,java,yaml,javascript,html,css,coffee,haml,php,puppet autocmd BufWritePre <buffer> :%s/\s\+$//e
+
