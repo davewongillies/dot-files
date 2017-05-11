@@ -43,6 +43,7 @@ Plugin 'xolox/vim-session'
 Plugin 'xuhdev/SingleCompile'
 Plugin 'gregsexton/gitv'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'editorconfig/editorconfig-vim'
 
 " vim-scripts repos
 Plugin 'Align'
