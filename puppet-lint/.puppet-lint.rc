@@ -1,0 +1,6 @@
+--fail-on-warnings
+--no-80chars-check
+--no-140chars-check
+--no-documentation-check
+--no-class_inherits_from_params_class-check
+--no-variable_scope-check
