@@ -1,4 +1,5 @@
 [global_config]
+  extra_styling = False
   focus = mouse
   title_hide_sizetext = True
 [keybindings]
