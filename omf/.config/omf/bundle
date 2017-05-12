@@ -1,0 +1,14 @@
+package apt
+package bang-bang
+package battery
+package config
+package docker-machine
+package linuxbrew
+package rustup
+package spark
+package tab
+package title
+package weather
+theme agnoster
+theme bobthefish
+theme default
