@@ -60,7 +60,7 @@ rofi.color-window:                   #002b37, #002b37, #003642
 ! "Parse known_hosts file for ssh mode" Set from: Default
 ! rofi.parse-known-hosts:              true
 ! "Set the modi to combine in combi mode" Set from: Default
-! rofi.combi-modi:                     window,run
+rofi.combi-modi:                     window,drun,run
 ! "Set the matching algorithm. (normal, regex, glob, fuzzy)" Set from: Default
 rofi.matching:                       fuzzy
 ! "Tokenize input string" Set from: Default
