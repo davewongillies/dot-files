@@ -159,8 +159,6 @@ map <C-b> :let &background = ( &background == "dark"? "light" : "dark" )<cr>
 
 " Align puppet resource attributes
 map <C-a>a :Align =><cr>
-" Open Tagbar
-map <C-T> :TagbarToggle<cr>
 
 nmap <F1> <nop>
 
@@ -246,6 +244,11 @@ let g:tagbar_type_puppet = {
     \'f:default'
   \]
 \}
+
+" tagbar options
+autocmd VimEnter * nested :call tagbar#autoopen(1)
+autocmd FileType * nested :call tagbar#autoopen(0)
+autocmd BufEnter * nested :call tagbar#autoopen(0)
 
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
                           \ 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
