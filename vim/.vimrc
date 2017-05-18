@@ -246,10 +246,24 @@ let g:tagbar_type_puppet = {
   \]
 \}
 
+let g:tagbar_type_terraform = {
+    \ 'ctagstype' : 'terraform',
+        \ 'kinds' : [
+        \ 'r:resources',
+        \ 'm:modules',
+        \ 'o:outputs',
+        \ 'v:variables',
+        \ 'p:providers',
+        \ 'f:tfvars'
+        \ ],
+    \ 'sort' : 0
+    \ }
+
 " tagbar options
 autocmd VimEnter * nested :call tagbar#autoopen(1)
 autocmd FileType * nested :call tagbar#autoopen(0)
 autocmd BufEnter * nested :call tagbar#autoopen(0)
+let g:tagbar_compact = 1
 
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
                           \ 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
