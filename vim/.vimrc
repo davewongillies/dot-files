@@ -47,6 +47,7 @@ Plugin 'gregsexton/gitv'
 " Ctags plugins
 Plugin 'xolox/vim-easytags'
 Plugin 'majutsushi/tagbar'
+Plugin 'lisongmin/markdown2ctags'
 
 " Syntax plugins
 Plugin 'scrooloose/syntastic'
