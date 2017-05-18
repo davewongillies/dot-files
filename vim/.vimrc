@@ -23,6 +23,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tsaleh/vim-tmux'
 Plugin 'xolox/vim-session'
 Plugin 'xuhdev/SingleCompile'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 " Themes
 Plugin 'bling/vim-airline'
@@ -151,8 +152,6 @@ map <C-t>K :tabclose<cr>
 
 " toggle hidden chars
 map <C-l> :set list!<cr>
-" toggle paste mode
-map <C-p> :set paste!<cr>
 " toggle relative/absolute number (numbers.vim)
 map <C-u> :NumbersToggle<cr>
 " toggle between light/dark backgrounds
@@ -247,3 +246,6 @@ let g:tagbar_type_puppet = {
     \'f:default'
   \]
 \}
+
+let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
+                          \ 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
