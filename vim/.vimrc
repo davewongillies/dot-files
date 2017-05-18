@@ -9,41 +9,53 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 
-" My Bundles here:
-" original repos on github
+Plugin 'tomtom/tlib_vim'
+Plugin 'xolox/vim-misc'
 Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'PotatoesMaster/i3-vim-syntax'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'edkolev/tmuxline.vim'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'godlygeek/tabular'
 Plugin 'jamessan/vim-gnupg'
-Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'kana/vim-smartinput'
-" Bundle 'tejr/vim-nagios'
 Plugin 'myusuf3/numbers.vim'
 Plugin 'rking/ag.vim'
-Plugin 'rodjek/vim-puppet'
-Plugin 'scrooloose/nerdtree'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'scrooloose/syntastic'
-Plugin 'tomtom/tlib_vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-git'
-Plugin 'tpope/vim-markdown'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-jdaddy'
 Plugin 'tsaleh/vim-tmux'
-" Plugin 'xolox/vim-easytags'
-Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-session'
 Plugin 'xuhdev/SingleCompile'
+
+" Themes
+Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'edkolev/tmuxline.vim'
+
+" Nerdtree
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+
+" Snippets
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+
+" Git plugins
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-git'
 Plugin 'gregsexton/gitv'
-Plugin 'Valloric/YouCompleteMe'
+
+" Ctags plugins
+Plugin 'xolox/vim-easytags'
+Plugin 'majutsushi/tagbar'
+
+" Syntax plugins
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-jdaddy'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'PotatoesMaster/i3-vim-syntax'
+Plugin 'hashivim/vim-hashicorp-tools'
+Plugin 'tpope/vim-markdown'
+Plugin 'rodjek/vim-puppet'
+" Bundle 'tejr/vim-nagios'
 
 " vim-scripts repos
 Plugin 'Align'
@@ -148,6 +160,8 @@ map <C-b> :let &background = ( &background == "dark"? "light" : "dark" )<cr>
 
 " Align puppet resource attributes
 map <C-a>a :Align =><cr>
+" Open Tagbar
+map <C-T> :TagbarToggle<cr>
 
 nmap <F1> <nop>
 
@@ -208,3 +222,28 @@ let g:Gitv_OpenHorizontal = 0
 
 autocmd FileType json,sh,eruby,spec,c,cpp,python,ruby,java,yaml,javascript,html,css,coffee,haml,php,puppet autocmd BufWritePre <buffer> :%s/\s\+$//e
 
+let g:UltiSnipsExpandTrigger = "<nop>"
+let g:ulti_expand_or_jump_res = 0
+function ExpandSnippetOrCarriageReturn()
+    let snippet = UltiSnips#ExpandSnippetOrJump()
+    if g:ulti_expand_or_jump_res > 0
+        return snippet
+    else
+        return "\<CR>"
+    endif
+endfunction
+inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
+
+let g:tagbar_type_puppet = {
+  \ 'ctagstype': 'puppet',
+  \ 'kinds': [
+    \'c:class',
+    \'s:site',
+    \'n:node',
+    \'v:variable',
+    \'i:include',
+    \'d:definition',
+    \'r:resource',
+    \'f:default'
+  \]
+\}
