@@ -1,3 +1,5 @@
+" I have to set shell to /bin/bash because I use fish
+" and vundle doesn't like non-POSIX shells
 set shell=/bin/bash
 " Vi non-compatible mode
 set nocompatible               " be iMproved
@@ -8,9 +10,13 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 
-
 Plugin 'tomtom/tlib_vim'
 Plugin 'xolox/vim-misc'
+
+" Ctags plugins
+Plugin 'majutsushi/tagbar'
+Plugin 'lisongmin/markdown2ctags'
+
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'godlygeek/tabular'
@@ -24,12 +30,13 @@ Plugin 'tsaleh/vim-tmux'
 Plugin 'xolox/vim-session'
 Plugin 'xuhdev/SingleCompile'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'lrvick/Conque-Shell'
 
 " Themes
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'edkolev/tmuxline.vim'
+Plugin 'altercation/vim-colors-solarized'
 
 " Nerdtree
 Plugin 'scrooloose/nerdtree'
@@ -44,22 +51,25 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-git'
 Plugin 'gregsexton/gitv'
 
-" Ctags plugins
-Plugin 'xolox/vim-easytags'
-Plugin 'majutsushi/tagbar'
-Plugin 'lisongmin/markdown2ctags'
-
 " Syntax plugins
-Plugin 'scrooloose/syntastic'
+Plugin 'vim-syntastic/syntastic'
 Plugin 'tpope/vim-jdaddy'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'PotatoesMaster/i3-vim-syntax'
 Plugin 'hashivim/vim-hashicorp-tools'
 Plugin 'tpope/vim-markdown'
-Plugin 'rodjek/vim-puppet'
-" Bundle 'tejr/vim-nagios'
+" Using my fork of vim-puppet while I wait for my PR
+" against upstream
+Plugin 'davewongillies/vim-puppet'
+Plugin 'fatih/vim-hclfmt'
+Plugin 'juliosueiras/vim-terraform-completion'
+Plugin 'ekalinin/Dockerfile.vim'
+
+Plugin 'davewongillies/vim-gradle'
+Plugin 'davewongillies/vim-eyaml'
 
 " vim-scripts repos
+
 Plugin 'Align'
 Plugin 'Gist.vim'
 Plugin 'matchit.zip'
@@ -67,9 +77,9 @@ Plugin 'tComment'
 
 call vundle#end()            " required
 
-
 " ==================== File type =========================
 filetype plugin on
+set omnifunc=syntaxcomplete#Complete
 " The following will make Vim load indentation rules and plugins according to the detected filetype.
 if has("autocmd")
     filetype plugin indent on
@@ -85,7 +95,7 @@ set showcmd        " Show (partial) command in status line.
 set number         " Line numbers
 set cursorline
 set nofoldenable   " disable folds
-set colorcolumn=80 " display a vertical coloured column at 80
+" set colorcolumn=80 " display a vertical coloured column at 80
 set scrolloff=20
 
 " Solarized colour theme
@@ -140,6 +150,10 @@ if has("syntax")
   let g:syntastic_python_flake8_args = '--max-line-length=1000'
   let g:puppet_module_detect=1               " enable puppet module detection
   let g:syntastic_puppet_puppetlint_args='--no-documentation-check --no-80chars-check --relative --no-selector_inside_resource-check'
+
+  let g:syntastic_always_populate_loc_list = 1
+  let g:syntastic_auto_loc_list = 1
+  let g:syntastic_check_on_open = 1
 endif
 
 " =============== Key Mappings ================
@@ -160,8 +174,9 @@ map <C-b> :let &background = ( &background == "dark"? "light" : "dark" )<cr>
 
 " Align puppet resource attributes
 map <C-a>a :Align =><cr>
-
 nmap <F1> <nop>
+map <C-t>t :TagbarToggle<cr>
+
 
 " Airline
 let g:airline_theme='powerlineish'
@@ -220,6 +235,24 @@ let g:Gitv_OpenHorizontal = 0
 
 autocmd FileType json,sh,eruby,spec,c,cpp,python,ruby,java,yaml,javascript,html,css,coffee,haml,php,puppet autocmd BufWritePre <buffer> :%s/\s\+$//e
 
+" YouCompleteMe
+let g:ycm_semantic_triggers =  {
+  \   'c' : ['->', '.'],
+  \   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
+  \             're!\[.*\]\s'],
+  \   'ocaml' : ['.', '#'],
+  \   'cpp,objcpp' : ['->', '.', '::'],
+  \   'perl' : ['->'],
+  \   'php' : ['->', '::'],
+  \   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go,groovy' : ['.'],
+  \   'ruby' : ['.', '::'],
+  \   'lua' : ['.', ':'],
+  \   'erlang' : [':'],
+\ }
+
+
+
+" Ultisnips
 let g:UltiSnipsExpandTrigger = "<nop>"
 let g:ulti_expand_or_jump_res = 0
 function! ExpandSnippetOrCarriageReturn()
@@ -232,37 +265,10 @@ function! ExpandSnippetOrCarriageReturn()
 endfunction
 inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
 
-let g:tagbar_type_puppet = {
-  \ 'ctagstype': 'puppet',
-  \ 'kinds': [
-    \'c:class',
-    \'s:site',
-    \'n:node',
-    \'v:variable',
-    \'i:include',
-    \'d:definition',
-    \'r:resource',
-    \'f:default'
-  \]
-\}
-
-let g:tagbar_type_terraform = {
-    \ 'ctagstype' : 'terraform',
-        \ 'kinds' : [
-        \ 'r:resources',
-        \ 'm:modules',
-        \ 'o:outputs',
-        \ 'v:variables',
-        \ 'p:providers',
-        \ 'f:tfvars'
-        \ ],
-    \ 'sort' : 0
-    \ }
-
 " tagbar options
 autocmd VimEnter * nested :call tagbar#autoopen(1)
 autocmd FileType * nested :call tagbar#autoopen(0)
-autocmd BufEnter * nested :call tagbar#autoopen(0)
+" autocmd BufEnter * nested :call tagbar#autoopen(0)
 let g:tagbar_compact = 1
 
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
