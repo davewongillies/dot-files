@@ -59,9 +59,7 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'PotatoesMaster/i3-vim-syntax'
 Plugin 'hashivim/vim-hashicorp-tools'
 Plugin 'tpope/vim-markdown'
-" Using my fork of vim-puppet while I wait for my PR
-" against upstream
-Plugin 'davewongillies/vim-puppet'
+Plugin 'rodjek/vim-puppet'
 Plugin 'fatih/vim-hclfmt'
 Plugin 'juliosueiras/vim-terraform-completion'
 Plugin 'ekalinin/Dockerfile.vim'
