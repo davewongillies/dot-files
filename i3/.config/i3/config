@@ -148,7 +148,7 @@ hide_edge_borders both
 # class                  border  backgr  text    indicator  child_border
 client.focused           #002b36 #002b36 #fdf6e3 #268bd2
 client.unfocused         #002b36 #002b36 #586e75 #002b36
-client.focused_inactive  #073642 #073642 #93a1a1 #002b36
+client.focused_inactive  #002b36 #002b36 #93a1a1 #002b36
 client.urgent            #dc322f #dc322f #fdf6e3 #dc322f
 
 # Open a nautilus window
