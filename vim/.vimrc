@@ -19,7 +19,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'lisongmin/markdown2ctags'
 
 Plugin 'MarcWeber/vim-addon-mw-utils'
-" Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'godlygeek/tabular'
 Plugin 'jamessan/vim-gnupg'
 Plugin 'kana/vim-smartinput'
@@ -80,13 +80,8 @@ call vundle#end()            " required
 
 " ==================== File type =========================
 filetype plugin on
-" set omnifunc=syntaxcomplete#Complete
-" The following will make Vim load indentation rules and plugins according to the detected filetype.
 filetype plugin indent on
-if has("autocmd")
-    " Arduino pde file support
-    autocmd BufNewFile,BufRead *.pde setf arduino
-endif
+filetype plugin indent on
 
 " enables proper mouse support
 set ttyfast
@@ -138,6 +133,8 @@ autocmd FileType yaml setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
 autocmd FileType ruby setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
 autocmd FileType php setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
 autocmd FileType coffee setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
+autocmd FileType terraform setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
+autocmd BufNewFile,BufRead *.pde setf arduino
 
 " ================= Syntastic settings ===============
 " Syntax highlighting
@@ -155,7 +152,6 @@ if has("syntax")
   let g:syntastic_always_populate_loc_list = 1
   let g:syntastic_auto_loc_list = 1
   let g:syntastic_check_on_open = 1
-  let g:syntastic_always_populate_loc_list = 1
 
 endif
 
@@ -240,6 +236,7 @@ let g:Gitv_OpenHorizontal = 0
 autocmd FileType json,sh,eruby,spec,c,cpp,python,ruby,java,yaml,javascript,html,css,coffee,haml,php,puppet autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 " YouCompleteMe
+set omnifunc=syntaxcomplete#Complete
 let g:ycm_semantic_triggers =  {
   \   'c' : ['->', '.'],
   \   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
