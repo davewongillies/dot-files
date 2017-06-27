@@ -1,6 +1,7 @@
 " I have to set shell to /bin/bash because I use fish
 " and vundle doesn't like non-POSIX shells
 set shell=/bin/bash
+
 " Vi non-compatible mode
 set nocompatible               " be iMproved
 filetype off                   " required! Don't know what the hell for though
@@ -18,7 +19,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'lisongmin/markdown2ctags'
 
 Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'godlygeek/tabular'
 Plugin 'jamessan/vim-gnupg'
 Plugin 'kana/vim-smartinput'
@@ -79,10 +80,10 @@ call vundle#end()            " required
 
 " ==================== File type =========================
 filetype plugin on
-set omnifunc=syntaxcomplete#Complete
+" set omnifunc=syntaxcomplete#Complete
 " The following will make Vim load indentation rules and plugins according to the detected filetype.
+filetype plugin indent on
 if has("autocmd")
-    filetype plugin indent on
     " Arduino pde file support
     autocmd BufNewFile,BufRead *.pde setf arduino
 endif
@@ -154,6 +155,8 @@ if has("syntax")
   let g:syntastic_always_populate_loc_list = 1
   let g:syntastic_auto_loc_list = 1
   let g:syntastic_check_on_open = 1
+  let g:syntastic_always_populate_loc_list = 1
+
 endif
 
 " =============== Key Mappings ================
@@ -226,6 +229,7 @@ let g:nerdtree_tabs_open_on_console_startup=1
 " Can't remember why I've set these
 set hlsearch
 set showcmd
+set ignorecase
 set smartcase
 
 " vim-session
