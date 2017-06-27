@@ -79,7 +79,6 @@ call vundle#end()            " required
 " ==================== File type =========================
 filetype plugin on
 filetype plugin indent on
-filetype plugin indent on
 
 " enables proper mouse support
 set ttyfast
