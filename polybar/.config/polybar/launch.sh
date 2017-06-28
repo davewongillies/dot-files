@@ -7,7 +7,13 @@ killall -q polybar
 while pgrep -x polybar >/dev/null; do sleep 1; done
 
 for bar in $(polybar -m|cut -d: -f1); do
-  polybar -r -q $bar &
+    echo "Launching bar for output ${bar}"
+    polybar -r -q $bar &
 done
+
+if ! pgrep -x polybar >/dev/null; then
+    echo "No configured bar found, launching default bar"
+    polybar -r -q default
+fi
 
 echo "Bars launched..."
