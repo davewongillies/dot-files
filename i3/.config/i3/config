@@ -153,3 +153,5 @@ client.urgent            #dc322f #dc322f #fdf6e3 #dc322f
 
 # Open a nautilus window
 bindsym $mod+n exec nautilus --new-window
+
+for_window [class="^Zeal$"] floating enable
