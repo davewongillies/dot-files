@@ -134,14 +134,13 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Startup Programs
+exec --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id dbus-launch nm-applet
 exec --no-startup-id dbus-launch owncloud&
 exec --no-startup-id dbus-launch zeal
 exec --no-startup-id dbus-launch gtk-redshift&
 exec --no-startup-id fake-gnome-panel
 exec --no-startup-id compton -b
-exec --no-startup-id $HOME/.config/polybar/launch.sh
-
 
 # Some colour theming
 hide_edge_borders both
