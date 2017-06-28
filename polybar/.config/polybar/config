@@ -55,176 +55,32 @@ scroll-down = i3wm-wsprev
 [bar/HDMI-1]
 monitor = HDMI-1
 monitor-fallback = LVDS-1
-width = ${bar/default.width}
-height = ${bar/default.height}
-radius = ${bar/default.radius}
-fixed-center = ${bar/default.fixed-center}
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = ${bar/default.line-size}
-line-color = ${bar/default.line-color}
-
-border-size = ${bar/default.border-size}
-border-color = ${bar/default.border-color}
-
-padding-left = ${bar/default.padding-left}
-padding-right = ${bar/default.padding-right}
-
-module-margin-left = ${bar/default.module-margin-left}
-module-margin-right = ${bar/default.module-margin-right}
-
 font-0 = Helvetica Neue:size=11:antialias=true;1
 font-1 = Helvetica Neue:size=11:antialias=true;1
-; font-2 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
-
-modules-left = ${bar/default.modules-left}
-modules-center = ${bar/default.modules-center}
-modules-right = ${bar/default.modules-right}
-
-tray-position = ${bar/default.tray-position}
-tray-padding = ${bar/default.tray-padding}
-tray-transparent = ${bar/default.tray-transparent}
-tray-detached = ${bar/default.tray-detached}
-wm-restack = ${bar/default.wm-restack}
-override-redirect = ${bar/default.override-redirect}
-scroll-up = ${bar/default.scroll-up}
-scroll-down = ${bar/default.scroll-down}
+inherit = bar/default
 
 [bar/LVDS-1]
 monitor = LVDS-1
 monitor-fallback = HDMI-1
-width = ${bar/default.width}
-height = ${bar/default.height}
-radius = ${bar/default.radius}
-fixed-center = ${bar/default.fixed-center}
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = ${bar/default.line-size}
-line-color = ${bar/default.line-color}
-
-border-size = ${bar/default.border-size}
-border-color = ${bar/default.border-color}
-
-padding-left = ${bar/default.padding-left}
-padding-right = ${bar/default.padding-right}
-
-module-margin-left = ${bar/default.module-margin-left}
-module-margin-right = ${bar/default.module-margin-right}
-
 font-0 = Helvetica Neue:size=11:antialias=true;1
 font-1 = Helvetica Neue:size=11:antialias=true;1
-; font-2 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
-
-modules-left = ${bar/default.modules-left}
-modules-center = ${bar/default.modules-center}
-modules-right = ${bar/default.modules-right}
-
-tray-position = ${bar/default.tray-position}
-tray-padding = ${bar/default.tray-padding}
-tray-transparent = ${bar/default.tray-transparent}
-tray-detached = ${bar/default.tray-detached}
-wm-restack = ${bar/default.wm-restack}
-override-redirect = ${bar/default.override-redirect}
-scroll-up = ${bar/default.scroll-up}
-scroll-down = ${bar/default.scroll-down}
+inherit = bar/default
 
 [bar/DP-1.1.8]
 monitor = DP-1.1.8
-width = 100%
-height = 27
-;offset-x = 1%
-;offset-y = 1%
-radius = 0
-fixed-center = false
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = 3
-line-color = #f00
-
-border-size = 0
-border-color = #00000000
-
-padding-left = 0
-padding-right = 0
-
-module-margin-left = 1
-module-margin-right = 2
-
-; font-0 = FantasqueSansMonoNerdFont=12;1
-; unifont:size=14:heavy:fontformat=truetype;-2
 font-0 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
 font-1 = FontAwesome:size=12;2
 font-2 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
-
-modules-left = i3
-modules-center = xwindow
 modules-right = volume memory cpu temperature eth date
-
-tray-position = right
-tray-padding = 2
-;tray-transparent = true
-;tray-background = #0063ff
-tray-detached = false
-
-wm-restack = i3
-
-override-redirect = false
-
-scroll-up = i3wm-wsnext
-scroll-down = i3wm-wsprev
+inherit = bar/default
 
 [bar/DP-1.8]
 monitor = DP-1.8
-width = 100%
-height = 27
-;offset-x = 1%
-;offset-y = 1%
-radius = 0
-fixed-center = false
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = 3
-line-color = #f00
-
-border-size = 0
-border-color = #00000000
-
-padding-left = 0
-padding-right = 0
-
-module-margin-left = 1
-module-margin-right = 2
-
-; font-0 = FantasqueSansMonoNerdFont=12;1
-; unifont:size=14:heavy:fontformat=truetype;-2
 font-0 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
 font-1 = FantasqueSansMonoNerdFont:size=12:antialias=false;-1
 font-2 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
-; font-2 = FantasqueSansMonoNerdFont=12;1
-
-modules-left = i3
-modules-center = xwindow
 modules-right = 
-
-; tray-position = right
-; tray-padding = 2
-;tray-transparent = true
-;tray-background = #0063ff
-
-wm-restack = i3
-
-override-redirect = false
-
-scroll-up = i3wm-wsnext
-scroll-down = i3wm-wsprev
+inherit = bar/default
 
 [module/xwindow]
 type = internal/xwindow
