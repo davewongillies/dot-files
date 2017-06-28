@@ -18,31 +18,26 @@ primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
 
-[bar/LVDS-1]
-monitor = LVDS-1
+[bar/default]
 width = 100%
 height = 27
 radius = 0
 fixed-center = false
-
 background = ${colors.background}
 foreground = ${colors.foreground}
-
 line-size = 3
 line-color = #f00
-
 border-size = 0
 border-color = #00000000
-
 padding-left = 0
 padding-right = 0
 
+font-0 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
+font-1 = FontAwesome:size=12;2
+font-2 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
+
 module-margin-left = 1
 module-margin-right = 2
-
-font-0 = Helvetica Neue:size=11:antialias=true;1
-font-1 = Helvetica Neue:size=11:antialias=true;1
-; font-2 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
 
 modules-left = i3
 modules-center = xwindow
@@ -51,57 +46,91 @@ modules-right = volume memory filesystem cpu temperature battery date
 tray-position = right
 tray-padding = 2
 tray-transparent = false
-;tray-background = #0063ff
 tray-detached = false
-
 wm-restack = i3
-
 override-redirect = false
-
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
 
 [bar/HDMI-1]
-width = 100%
-height = 27
-radius = 0
-fixed-center = false
+monitor = HDMI-1
+monitor-fallback = LVDS-1
+width = ${bar/default.width}
+height = ${bar/default.height}
+radius = ${bar/default.radius}
+fixed-center = ${bar/default.fixed-center}
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 3
-line-color = #f00
+line-size = ${bar/default.line-size}
+line-color = ${bar/default.line-color}
 
-border-size = 0
-border-color = #00000000
+border-size = ${bar/default.border-size}
+border-color = ${bar/default.border-color}
 
-padding-left = 0
-padding-right = 0
+padding-left = ${bar/default.padding-left}
+padding-right = ${bar/default.padding-right}
 
-module-margin-left = 1
-module-margin-right = 2
+module-margin-left = ${bar/default.module-margin-left}
+module-margin-right = ${bar/default.module-margin-right}
 
-font-0 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
-font-1 = FontAwesome:size=12;2
-font-2 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
+font-0 = Helvetica Neue:size=11:antialias=true;1
+font-1 = Helvetica Neue:size=11:antialias=true;1
+; font-2 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
 
-modules-left = i3
-modules-center = xwindow
-modules-right = volume memory cpu temperature wlan0 date
+modules-left = ${bar/default.modules-left}
+modules-center = ${bar/default.modules-center}
+modules-right = ${bar/default.modules-right}
 
-tray-position = right
-tray-padding = 2
-tray-transparent = true
-;tray-background = #0063ff
-tray-detached = false
+tray-position = ${bar/default.tray-position}
+tray-padding = ${bar/default.tray-padding}
+tray-transparent = ${bar/default.tray-transparent}
+tray-detached = ${bar/default.tray-detached}
+wm-restack = ${bar/default.wm-restack}
+override-redirect = ${bar/default.override-redirect}
+scroll-up = ${bar/default.scroll-up}
+scroll-down = ${bar/default.scroll-down}
 
-wm-restack = i3
+[bar/LVDS-1]
+monitor = LVDS-1
+monitor-fallback = HDMI-1
+width = ${bar/default.width}
+height = ${bar/default.height}
+radius = ${bar/default.radius}
+fixed-center = ${bar/default.fixed-center}
 
-override-redirect = false
+background = ${colors.background}
+foreground = ${colors.foreground}
 
-scroll-up = i3wm-wsnext
-scroll-down = i3wm-wsprev
+line-size = ${bar/default.line-size}
+line-color = ${bar/default.line-color}
+
+border-size = ${bar/default.border-size}
+border-color = ${bar/default.border-color}
+
+padding-left = ${bar/default.padding-left}
+padding-right = ${bar/default.padding-right}
+
+module-margin-left = ${bar/default.module-margin-left}
+module-margin-right = ${bar/default.module-margin-right}
+
+font-0 = Helvetica Neue:size=11:antialias=true;1
+font-1 = Helvetica Neue:size=11:antialias=true;1
+; font-2 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
+
+modules-left = ${bar/default.modules-left}
+modules-center = ${bar/default.modules-center}
+modules-right = ${bar/default.modules-right}
+
+tray-position = ${bar/default.tray-position}
+tray-padding = ${bar/default.tray-padding}
+tray-transparent = ${bar/default.tray-transparent}
+tray-detached = ${bar/default.tray-detached}
+wm-restack = ${bar/default.wm-restack}
+override-redirect = ${bar/default.override-redirect}
+scroll-up = ${bar/default.scroll-up}
+scroll-down = ${bar/default.scroll-down}
 
 [bar/DP-1.1.8]
 monitor = DP-1.1.8
