@@ -41,7 +41,7 @@ module-margin-right = 2
 
 modules-left = i3
 modules-center = xwindow
-modules-right = volume memory filesystem cpu temperature battery date
+modules-right = volume memory filesystem loadavg temperature battery date
 
 tray-position = right
 tray-padding = 2
@@ -71,7 +71,7 @@ monitor = DP-1.1.8
 font-0 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
 font-1 = FontAwesome:size=12;2
 font-2 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
-modules-right = volume memory cpu temperature eth date
+modules-right = volume memory loadavg temperature eth date
 inherit = bar/default
 
 [bar/DP-1.8]
@@ -405,5 +405,10 @@ label-discharging = %percentage%% %time%
 ;
 ; Default: 5
 poll-interval = 5
+
+[module/loadavg]
+type = custom/script
+exec = cut -d' ' -f1 /proc/loadavg
+format-underline = #f90000
 
 ; vim:ft=dosini
