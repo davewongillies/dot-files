@@ -3,6 +3,7 @@ package bang-bang
 package battery
 package config
 package docker-machine
+package fasd
 package linuxbrew
 package rustup
 package spark
