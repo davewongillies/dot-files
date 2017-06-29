@@ -36,12 +36,12 @@ font-0 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
 font-1 = FontAwesome:size=12;2
 font-2 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
 
-module-margin-left = 0
+module-margin-left = 1
 module-margin-right = 1
 
 modules-left = my-text i3
 modules-center = xwindow
-modules-right = volume memory filesystem loadavg temperature battery date
+modules-right = volume memory filesystem loadavg temperature weather battery date
 
 tray-position = right
 tray-padding = 2
@@ -64,6 +64,8 @@ monitor = LVDS-1
 monitor-fallback = HDMI-1
 font-0 = Helvetica Neue:size=11:antialias=true;1
 font-1 = Helvetica Neue:size=11:antialias=true;1
+modules-center = 
+modules-right = gpmdp volume memory loadavg temperature weather battery time
 inherit = bar/default
 
 [bar/DP-1.1.8]
@@ -108,7 +110,7 @@ interval = 25
 
 mount-0 = /
 
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-mounted =  %mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
@@ -282,6 +284,20 @@ format-disconnected =
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
+[module/time]
+type = internal/date
+interval = 5
+
+date = ""
+date-alt = " %Y-%m-%d"
+
+time = " %r"
+time-alt = " %r"
+
+format-underline = #0a6cf5
+
+label = "%date% %time% "
+
 [module/date]
 type = internal/date
 interval = 5
@@ -299,13 +315,19 @@ label = "%date% %time% "
 [module/volume]
 type = internal/volume
 
-format-volume = <label-volume> <bar-volume>
-label-volume = 
+format-volume = <ramp-volume> <label-volume>
+label-volume = %percentage%%
 label-volume-foreground = ${root.foreground}
 
-format-muted-prefix = " "
+; format-muted-prefix = " "
 format-muted-foreground = ${colors.foreground-alt}
-label-muted = sound muted
+
+label-muted = 
+label-muted-foreground = #66
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
 
 bar-volume-width = 5
 bar-volume-foreground-0 = #55aa55
@@ -329,7 +351,7 @@ type = internal/temperature
 thermal-zone = 0
 warn-temperature = 60
 
-format-prefix = ""
+; format-prefix = ""
 format = <ramp> <label>
 format-underline = #f50a4d
 format-warn = <ramp> <label-warn>
@@ -339,10 +361,10 @@ label = %temperature%
 label-warn = %temperature%
 label-warn-foreground = ${colors.secondary}
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-foreground = ${colors.foreground-alt}
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+; ramp-foreground = ${colors.secondary}
 
 [module/powermenu]
 type = custom/menu
@@ -393,8 +415,12 @@ full-at = 99
 battery = BAT0
 adapter = AC0
 
-label-discharging = %percentage%% %time%
+label-discharging = %percentage%%
+label-full =  %percentage%%
+format-charging = <animation-charging> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
 
+time-format = %H:%M
 ; If an inotify event haven't been reported in this many
 ; seconds, manually poll for new values.
 ;
@@ -405,12 +431,35 @@ label-discharging = %percentage%% %time%
 ;
 ; Default: 5
 poll-interval = 5
+; Only applies if <ramp-capacity> is used
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+; Only applies if <bar-capacity> is used
+bar-capacity-width = 10
+
+; Only applies if <animation-charging> is used
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+; Framerate in milliseconds
+animation-charging-framerate = 750
 
 [module/loadavg]
 type = custom/script
 exec = cut -d' ' -f1 /proc/loadavg
 format-prefix = " "
 format-underline = #f90000
+
+[module/gpmdp]
+type = custom/script
+exec = ~/bin/playing.sh
+tail = true
 
 [module/weather]
 type = custom/script
