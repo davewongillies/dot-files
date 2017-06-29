@@ -4,13 +4,15 @@ import urllib.request
 import os
 
 city = "San Francisco"
-api_key = os.environ['OPENWEATHER_API_KEY']
 units = "Metric"
 unit_key = "C"
 
-weather = eval(str(urllib.request.urlopen("http://api.openweathermap.org/data/2.5/weather?q={}&APPID={}&units={}".format(city, api_key, units)).read())[2:-1])
+try:
+    api_key = os.environ['OPENWEATHER_API_KEY']
+    weather = eval(str(urllib.request.urlopen("http://api.openweathermap.org/data/2.5/weather?q={}&APPID={}&units={}".format(city, api_key, units)).read())[2:-1])
+    # info = weather["weather"][0]["description"].capitalize()
+    temp = int(float(weather["main"]["temp"]))
+    print("{}°{}".format(temp, unit_key))
 
-# info = weather["weather"][0]["description"].capitalize()
-temp = float(weather["main"]["temp"])
-
-print("%i°%s" % (temp, unit_key))
+except KeyError:
+    print('No OPENWEATHER_API_KEY env var found')
