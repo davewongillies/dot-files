@@ -71,7 +71,7 @@ monitor = DP-1.1.8
 font-0 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
 font-1 = FontAwesome:size=12;2
 font-2 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
-modules-right = volume memory loadavg temperature eth date
+modules-right = volume memory loadavg temperature weather eth date
 inherit = bar/default
 
 [bar/DP-1.8]
@@ -411,6 +411,12 @@ type = custom/script
 exec = cut -d' ' -f1 /proc/loadavg
 format-prefix = " "
 format-underline = #f90000
+
+[module/weather]
+type = custom/script
+exec = ~/bin/weather
+format-prefix = " "
+interval = 600
 
 [module/my-text]
 type = custom/text
