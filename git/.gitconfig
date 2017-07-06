@@ -1,0 +1,42 @@
+[user]
+    name = David Gillies
+    signingkey = 21499650C3010361395A406EFFE50B78D42FD949
+
+[commit]
+    gpgsign = true
+
+[core]
+    editor = /usr/bin/vim
+
+[alias]
+    logs = log --topo-order --stat
+
+[push]
+    default = current
+
+[merge]
+    tool = meld
+
+[diff]
+    tool = meld
+
+[difftool]
+    prompt = false
+
+[branch "master"]
+    remote = origin
+    merge = refs/heads/master
+
+[color]
+    branch = always
+    diff = always
+    grep = always
+    interactive = always
+    pager = true
+    showbranch = auto
+    status = auto
+    ui = always
+
+[log]
+    decorate = auto
+    showSignature = true
