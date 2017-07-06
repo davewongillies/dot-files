@@ -29,15 +29,13 @@ line-size = 2
 line-color = #f00
 border-size = 0
 border-color = #00000000
-padding-left = 0
-padding-right = 0
+padding = 0
 
 font-0 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
 font-1 = FontAwesome:size=12;2
 font-2 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
 
-module-margin-left = 1
-module-margin-right = 1
+module-margin = 1
 
 modules-left = my-text i3
 modules-center = xwindow
