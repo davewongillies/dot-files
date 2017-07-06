@@ -2,6 +2,7 @@ package apt
 package bang-bang
 package battery
 package config
+package direnv
 package docker-machine
 package fasd
 package linuxbrew
