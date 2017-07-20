@@ -9,6 +9,10 @@ filetype off                   " required! Don't know what the hell for though
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+" When installing fresh
+" $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+" Then:
+" $ vim -i NONE -c PluginInstall -c PluginClean! -c quitall
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'tomtom/tlib_vim'
@@ -19,6 +23,11 @@ Plugin 'majutsushi/tagbar'
 Plugin 'lisongmin/markdown2ctags'
 
 Plugin 'MarcWeber/vim-addon-mw-utils'
+
+
+" From a fresh install of YouCompleteMe
+" $ cd ~/.vim/bundle/YouCompleteMe
+" $ ./install.py
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'godlygeek/tabular'
 Plugin 'jamessan/vim-gnupg'
@@ -63,9 +72,13 @@ Plugin 'rodjek/vim-puppet'
 Plugin 'fatih/vim-hclfmt'
 Plugin 'juliosueiras/vim-terraform-completion'
 Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'tolecnal/icinga2-vim'
 
 Plugin 'davewongillies/vim-gradle'
 Plugin 'davewongillies/vim-eyaml'
+
+Plugin 'KabbAmine/zeavim.vim'
+
 
 " vim-scripts repos
 
