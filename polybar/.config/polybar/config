@@ -38,13 +38,9 @@ font-2 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
 module-margin = 1
 
 modules-left = my-text i3
-modules-center = xwindow
+modules-center = 
 modules-right = volume memory filesystem loadavg temperature weather battery date
 
-tray-position = right
-tray-padding = 2
-tray-transparent = false
-tray-detached = false
 wm-restack = i3
 override-redirect = false
 scroll-up = i3wm-wsnext
@@ -73,14 +69,20 @@ font-1 = FontAwesome:size=12;2
 font-2 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
 modules-right = volume memory loadavg temperature weather eth date
 inherit = bar/default
+tray-position = right
+tray-padding = 2
+tray-transparent = false
+tray-detached = false
+
 
 [bar/DP-1.8]
 monitor = DP-1.8
 font-0 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
 font-1 = FantasqueSansMonoNerdFont:size=12:antialias=false;-1
 font-2 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
-modules-right = 
+modules-right = gpmdp
 inherit = bar/default
+padding-right = 2
 
 [module/xwindow]
 type = internal/xwindow
