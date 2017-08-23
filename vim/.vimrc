@@ -36,6 +36,7 @@ Plugin 'myusuf3/numbers.vim'
 Plugin 'rking/ag.vim'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-commentary'
 Plugin 'tsaleh/vim-tmux'
 Plugin 'xolox/vim-session'
 Plugin 'xuhdev/SingleCompile'
@@ -85,7 +86,6 @@ Plugin 'KabbAmine/zeavim.vim'
 Plugin 'Align'
 Plugin 'Gist.vim'
 Plugin 'matchit.zip'
-Plugin 'tComment'
 
 call vundle#end()            " required
 
@@ -137,13 +137,16 @@ set expandtab
 set shiftwidth=4
 set tabstop=4
 
-autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-autocmd FileType python setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
-autocmd FileType yaml setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
-autocmd FileType ruby setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
-autocmd FileType php setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
-autocmd FileType coffee setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
-autocmd FileType terraform setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
+autocmd FileType python    setlocal smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+autocmd FileType python    setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
+autocmd FileType yaml      setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
+autocmd FileType ruby      setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
+autocmd FileType php       setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
+autocmd FileType coffee    setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
+autocmd FileType terraform setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2 commentstring=#%s
+
+" Delete any whitespace at end of lines
+autocmd FileType json,sh,eruby,spec,c,cpp,python,ruby,java,yaml,javascript,html,css,coffee,haml,php,puppet,terraform autocmd BufWritePre <buffer> :%s/\s\+$//e
 autocmd BufNewFile,BufRead *.pde setf arduino
 
 " ================= Syntastic settings ===============
@@ -151,7 +154,7 @@ autocmd BufNewFile,BufRead *.pde setf arduino
 if has("syntax")
   syntax on
   let g:syntastic_mode_map = { 'mode': 'active',
-                                 \ 'active_filetypes': ['ruby', 'shell', 'python'],
+                                 \ 'active_filetypes': ['ruby', 'shell', 'python', 'puppet', 'terraform'],
                                  \ 'passive_filetypes': [ ] }
   let g:syntastic_check_on_open=1            " check syntax on file open
   let g:syntastic_python_checkers=['flake8'] " use flake8 for python syntax checking
@@ -162,7 +165,15 @@ if has("syntax")
   let g:syntastic_always_populate_loc_list = 1
   let g:syntastic_auto_loc_list = 1
   let g:syntastic_check_on_open = 1
-
+  " ignore:
+  " Terraform:tflint: Module source is not pinned
+  " Ruby:erb: possibly useless use of a variable...
+  let g:syntastic_quiet_messages =
+    \ {'regex':
+        \ [
+            \ 'Module source.*is not pinned',
+            \ 'possibly useless use of a variable in void context',
+    \ ]}
 endif
 
 " =============== Key Mappings ================
@@ -241,12 +252,10 @@ set smartcase
 " vim-session
 let g:session_autosave='no'
 
+" gitv
 let g:Gitv_OpenHorizontal = 0
 
-autocmd FileType json,sh,eruby,spec,c,cpp,python,ruby,java,yaml,javascript,html,css,coffee,haml,php,puppet autocmd BufWritePre <buffer> :%s/\s\+$//e
-
 " YouCompleteMe
-set omnifunc=syntaxcomplete#Complete
 let g:ycm_semantic_triggers =  {
   \   'c' : ['->', '.'],
   \   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
@@ -261,7 +270,8 @@ let g:ycm_semantic_triggers =  {
   \   'erlang' : [':'],
 \ }
 
-
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
 
 " Ultisnips
 let g:UltiSnipsExpandTrigger = "<nop>"
@@ -274,6 +284,7 @@ function! ExpandSnippetOrCarriageReturn()
         return "\<CR>"
     endif
 endfunction
+
 inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
 
 " tagbar options
@@ -284,3 +295,12 @@ let g:tagbar_compact = 1
 
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
                           \ 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
+
+" Terraform
+" (Optional)Hide Info(Preview) window after completions
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+let g:eyaml_encryption_method = 'gpg'
+let g:eyaml_gpg_always_trust = 1
+let g:eyaml_gpg_recipients_file = 'hiera-eyaml-gpg.recipients'
