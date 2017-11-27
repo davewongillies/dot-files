@@ -24,11 +24,11 @@ Plugin 'lisongmin/markdown2ctags'
 
 Plugin 'MarcWeber/vim-addon-mw-utils'
 
+" neocompletion
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'roxma/nvim-yarp'
+Plugin 'roxma/vim-hug-neovim-rpc'
 
-" From a fresh install of YouCompleteMe
-" $ cd ~/.vim/bundle/YouCompleteMe
-" $ ./install.py
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'godlygeek/tabular'
 Plugin 'jamessan/vim-gnupg'
 Plugin 'kana/vim-smartinput'
@@ -63,7 +63,8 @@ Plugin 'tpope/vim-git'
 Plugin 'gregsexton/gitv'
 
 " Syntax plugins
-Plugin 'vim-syntastic/syntastic'
+" Plugin 'vim-syntastic/syntastic'
+Plugin 'w0rp/ale'
 Plugin 'tpope/vim-jdaddy'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'PotatoesMaster/i3-vim-syntax'
@@ -74,15 +75,14 @@ Plugin 'fatih/vim-hclfmt'
 Plugin 'juliosueiras/vim-terraform-completion'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'tolecnal/icinga2-vim'
+Plugin 'dag/vim-fish'
 
 Plugin 'davewongillies/vim-gradle'
 Plugin 'davewongillies/vim-eyaml'
 
 Plugin 'KabbAmine/zeavim.vim'
 
-
 " vim-scripts repos
-
 Plugin 'Align'
 Plugin 'Gist.vim'
 Plugin 'matchit.zip'
@@ -153,27 +153,9 @@ autocmd BufNewFile,BufRead *.pde setf arduino
 " Syntax highlighting
 if has("syntax")
   syntax on
-  let g:syntastic_mode_map = { 'mode': 'active',
-                                 \ 'active_filetypes': ['ruby', 'shell', 'python', 'puppet', 'terraform'],
-                                 \ 'passive_filetypes': [ ] }
-  let g:syntastic_check_on_open=1            " check syntax on file open
-  let g:syntastic_python_checkers=['flake8'] " use flake8 for python syntax checking
-  let g:syntastic_python_flake8_args = '--max-line-length=1000'
-  let g:puppet_module_detect=1               " enable puppet module detection
-  let g:syntastic_puppet_puppetlint_args='--no-documentation-check --no-80chars-check --relative --no-selector_inside_resource-check'
-
-  let g:syntastic_always_populate_loc_list = 1
-  let g:syntastic_auto_loc_list = 1
-  let g:syntastic_check_on_open = 1
-  " ignore:
-  " Terraform:tflint: Module source is not pinned
-  " Ruby:erb: possibly useless use of a variable...
-  let g:syntastic_quiet_messages =
-    \ {'regex':
-        \ [
-            \ 'Module source.*is not pinned',
-            \ 'possibly useless use of a variable in void context',
-    \ ]}
+  let g:airline#extensions#ale#enabled = 1
+  nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+  nmap <silent> <C-j> <Plug>(ale_next_wrap)
 endif
 
 " =============== Key Mappings ================
@@ -272,6 +254,10 @@ let g:ycm_semantic_triggers =  {
 
 let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
+
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#complete_method = "omnifunc"
+let g:deoplete#enable_yarp = 1
 
 " Ultisnips
 let g:UltiSnipsExpandTrigger = "<nop>"
