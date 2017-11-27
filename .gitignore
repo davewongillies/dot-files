@@ -1,2 +1,5 @@
 *.sw?
 *.orig
+private.fish
+
+*.pyc
