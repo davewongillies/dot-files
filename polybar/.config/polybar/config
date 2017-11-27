@@ -67,22 +67,24 @@ monitor = DP-1.1.8
 font-0 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
 font-1 = FontAwesome:size=12;2
 font-2 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
-modules-right = volume memory loadavg temperature weather eth date
-inherit = bar/default
-tray-position = right
-tray-padding = 2
-tray-transparent = false
-tray-detached = false
+modules-right = gpmdp
 
+inherit = bar/default
 
 [bar/DP-1.8]
 monitor = DP-1.8
 font-0 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
 font-1 = FantasqueSansMonoNerdFont:size=12:antialias=false;-1
 font-2 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
-modules-right = gpmdp
+modules-right = volume memory loadavg temperature weather eth date
+
 inherit = bar/default
 padding-right = 2
+
+tray-position = right
+tray-padding = 2
+tray-transparent = false
+tray-detached = false
 
 [module/xwindow]
 type = internal/xwindow
