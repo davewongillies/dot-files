@@ -3,7 +3,7 @@
     signingkey = 21499650C3010361395A406EFFE50B78D42FD949
 
 [commit]
-    gpgsign = true
+    gpgsign = false
 
 [core]
     editor = vim
