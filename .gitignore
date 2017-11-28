@@ -1,5 +1,20 @@
-*.sw?
-*.orig
-private.fish
+### Vim ###
+# swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-v][a-z]
+[._]sw[a-p]
 
-*.pyc
+### Git ###
+*.orig
+
+# Byte-compiled / optimized / DLL files
+*.py[cod]
+
+# fish-y things
+private.fish
+fishd.*
+fish_history
+fish/.config/fish/fundle
+fish/.config/fish/functions
+
