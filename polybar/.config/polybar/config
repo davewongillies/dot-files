@@ -49,33 +49,23 @@ scroll-down = i3wm-wsprev
 [bar/HDMI-1]
 monitor = HDMI-1
 monitor-fallback = LVDS-1
-font-0 = Helvetica Neue:size=11:antialias=true;1
-font-1 = Helvetica Neue:size=11:antialias=true;1
 inherit = bar/default
 
 [bar/LVDS-1]
 monitor = LVDS-1
 monitor-fallback = HDMI-1
-font-0 = Helvetica Neue:size=11:antialias=true;1
-font-1 = Helvetica Neue:size=11:antialias=true;1
 modules-center = 
 modules-right = gpmdp volume memory loadavg temperature weather battery time
 inherit = bar/default
 
 [bar/DP-1.1.8]
 monitor = DP-1.1.8
-font-0 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
-font-1 = FontAwesome:size=12;2
-font-2 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
 modules-right = gpmdp
 
 inherit = bar/default
 
 [bar/DP-1.8]
 monitor = DP-1.8
-font-0 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
-font-1 = FantasqueSansMonoNerdFont:size=12:antialias=false;-1
-font-2 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
 modules-right = volume memory loadavg temperature weather eth date
 
 inherit = bar/default
