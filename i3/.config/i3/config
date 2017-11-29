@@ -33,7 +33,7 @@ bindsym $mod+l exec gnome-screensaver-command -l
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec i3_menu
+bindsym $mod+d exec rofi -show combi -modi combi
 
 # move current window to scratch pad
 bindsym $mod+Shift+minus move scratchpad
