@@ -6,6 +6,7 @@ package direnv
 package docker-machine
 package fasd
 package gi
+package https://github.com/davewongillies/plugin-awsmfa
 package hub
 package linuxbrew
 package local-config
