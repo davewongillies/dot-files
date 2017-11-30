@@ -287,6 +287,9 @@ let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
+let g:terraform_fmt_on_save = 1
+let g:terraform_align = 1
+
 let g:eyaml_encryption_method = 'gpg'
 let g:eyaml_gpg_always_trust = 1
 let g:eyaml_gpg_recipients_file = 'hiera-eyaml-gpg.recipients'
