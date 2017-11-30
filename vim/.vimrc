@@ -6,92 +6,92 @@ set shell=/bin/bash
 set nocompatible               " be iMproved
 filetype off                   " required! Don't know what the hell for though
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-" When installing fresh
-" $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+call plug#begin('~/.vim/bundle')
+
 " Then:
-" $ vim -i NONE -c PluginInstall -c PluginClean! -c quitall
-Plugin 'VundleVim/Vundle.vim'
+" $ vim -i NONE -c PlugInstall -c PlugClean! -c quitall
 
-Plugin 'tomtom/tlib_vim'
-Plugin 'xolox/vim-misc'
+Plug 'tomtom/tlib_vim'
+Plug 'xolox/vim-misc'
 
 " Ctags plugins
-Plugin 'majutsushi/tagbar'
-Plugin 'lisongmin/markdown2ctags'
+Plug 'majutsushi/tagbar'
+Plug 'lisongmin/markdown2ctags'
 
-Plugin 'MarcWeber/vim-addon-mw-utils'
+Plug 'MarcWeber/vim-addon-mw-utils'
 
 " neocompletion
-Plugin 'Shougo/deoplete.nvim'
-Plugin 'roxma/nvim-yarp'
-Plugin 'roxma/vim-hug-neovim-rpc'
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
 
-Plugin 'godlygeek/tabular'
-Plugin 'jamessan/vim-gnupg'
-Plugin 'kana/vim-smartinput'
-Plugin 'myusuf3/numbers.vim'
-Plugin 'rking/ag.vim'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-commentary'
-Plugin 'tsaleh/vim-tmux'
-Plugin 'xolox/vim-session'
-Plugin 'xuhdev/SingleCompile'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'lrvick/Conque-Shell'
+Plug 'godlygeek/tabular'
+Plug 'jamessan/vim-gnupg'
+Plug 'kana/vim-smartinput'
+Plug 'myusuf3/numbers.vim'
+Plug 'rking/ag.vim'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tsaleh/vim-tmux'
+Plug 'xolox/vim-session'
+Plug 'xuhdev/SingleCompile'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'lrvick/Conque-Shell'
 
 " Themes
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'edkolev/tmuxline.vim'
-Plugin 'altercation/vim-colors-solarized'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'edkolev/tmuxline.vim'
+Plug 'altercation/vim-colors-solarized'
 
 " Nerdtree
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
 
 " Snippets
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " Git plugins
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-git'
-Plugin 'gregsexton/gitv'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-git'
+Plug 'gregsexton/gitv'
 
 " Syntax plugins
 " Plugin 'vim-syntastic/syntastic'
-Plugin 'w0rp/ale'
-Plugin 'tpope/vim-jdaddy'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'PotatoesMaster/i3-vim-syntax'
-Plugin 'hashivim/vim-hashicorp-tools'
-Plugin 'tpope/vim-markdown'
-Plugin 'rodjek/vim-puppet'
-Plugin 'fatih/vim-hclfmt'
-Plugin 'juliosueiras/vim-terraform-completion'
-Plugin 'ekalinin/Dockerfile.vim'
-Plugin 'tolecnal/icinga2-vim'
-Plugin 'dag/vim-fish'
+Plug 'w0rp/ale'
+Plug 'tpope/vim-jdaddy'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'PotatoesMaster/i3-vim-syntax'
+Plug 'hashivim/vim-hashicorp-tools'
+Plug 'tpope/vim-markdown'
+Plug 'rodjek/vim-puppet'
+Plug 'juliosueiras/vim-terraform-completion'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'tolecnal/icinga2-vim'
+Plug 'dag/vim-fish'
 
-Plugin 'davewongillies/vim-gradle'
-Plugin 'davewongillies/vim-eyaml'
+Plug 'davewongillies/vim-gradle'
+Plug 'davewongillies/vim-eyaml'
 
-Plugin 'KabbAmine/zeavim.vim'
+Plug 'KabbAmine/zeavim.vim'
 
 " vim-scripts repos
-Plugin 'Align'
-Plugin 'Gist.vim'
-Plugin 'matchit.zip'
+Plug 'vim-scripts/Align'
+Plug 'vim-scripts/Gist.vim'
+Plug 'vim-scripts/matchit.zip'
 
-call vundle#end()            " required
+call plug#end()            " required
 
 " ==================== File type =========================
 filetype plugin on
-filetype plugin indent on
 
 " enables proper mouse support
 set ttyfast
