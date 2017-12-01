@@ -90,7 +90,7 @@ Plug 'vim-scripts/matchit.zip'
 
 call plug#end()            " required
 
-" ==================== File type =========================
+" === File type =============================================================
 filetype plugin on
 
 " enables proper mouse support
@@ -104,6 +104,7 @@ set nofoldenable   " disable folds
 " set colorcolumn=80 " display a vertical coloured column at 80
 set scrolloff=20
 
+" === Solarized ==============================================================
 " Solarized colour theme
 " colorscheme solarized
 let g:solarized_termtrans = 1
@@ -124,14 +125,14 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-" ================ Persistent Undo ==================
+" === Persistent Undo =======================================================
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
 
 set undodir=~/.vim/backups
 set undofile
 
-" ================= Indentation ======================
+" === Indentation ===========================================================
 " Default to 4 spaces for soft tabs
 set expandtab
 set shiftwidth=4
@@ -149,7 +150,7 @@ autocmd FileType terraform setlocal tabstop=8 expandtab shiftwidth=2 softtabstop
 autocmd FileType json,sh,eruby,spec,c,cpp,python,ruby,java,yaml,javascript,html,css,coffee,haml,php,puppet,terraform autocmd BufWritePre <buffer> :%s/\s\+$//e
 autocmd BufNewFile,BufRead *.pde setf arduino
 
-" ================= Syntastic settings ===============
+" === Syntax settings ========================================================
 " Syntax highlighting
 if has("syntax")
   syntax on
@@ -158,7 +159,7 @@ if has("syntax")
   nmap <silent> <C-j> <Plug>(ale_next_wrap)
 endif
 
-" =============== Key Mappings ================
+" === Key Mappings ===========================================================
 " ctrl-t movement for tabs
 map <C-t><up> :tabr<cr>
 map <C-t><down> :tabl<cr>
@@ -175,12 +176,13 @@ map <C-u> :NumbersToggle<cr>
 map <C-b> :let &background = ( &background == "dark"? "light" : "dark" )<cr>
 
 " Align puppet resource attributes
-map <C-a>a :Align =><cr>
+" This can be replaced with :Tab />
+" map <C-a>a :Align =><cr>
 nmap <F1> <nop>
 map <C-t>t :TagbarToggle<cr>
 
 
-" Airline
+" === Airline ================================================================
 let g:airline_theme='powerlineish'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 1
@@ -197,11 +199,11 @@ set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
 autocmd BufWritePost .vimrc so ~/.vimrc
 autocmd BufWritePost .gvimrc so ~/.gvimrc
 
-" ============== List ==================
+" === List ===================================================================
 " We set the list then show special chars
 set list listchars=trail:.,precedes:«,extends:»,eol:↲,tab:\░\░ 
 
-" ================= NERDTree ==========================
+" === NERDTree ===============================================================
 " toggle NERDTree
 map <C-n> :NERDTreeToggle<cr>
 let NERDTreeShowHidden = 0
@@ -214,17 +216,18 @@ set showcmd
 set ignorecase
 set smartcase
 
-" vim-session
+" === vim-session ============================================================
 let g:session_autosave='no'
 
-" gitv
+" === gitv ===================================================================
 let g:Gitv_OpenHorizontal = 0
 
+" === deoplete ===============================================================
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#complete_method = "omnifunc"
 let g:deoplete#enable_yarp = 1
 
-" Ultisnips
+" === Ultisnips ==============================================================
 let g:UltiSnipsExpandTrigger = "<nop>"
 let g:ulti_expand_or_jump_res = 0
 function! ExpandSnippetOrCarriageReturn()
@@ -238,16 +241,17 @@ endfunction
 
 inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
 
-" tagbar options
+" === tagbar =================================================================
 autocmd VimEnter * nested :call tagbar#autoopen(1)
 autocmd FileType * nested :call tagbar#autoopen(0)
 " autocmd BufEnter * nested :call tagbar#autoopen(0)
 let g:tagbar_compact = 1
 
+" === Ctrl-P =================================================================
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
                           \ 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
 
-" Terraform
+" === terraform ==============================================================
 " (Optional)Hide Info(Preview) window after completions
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
@@ -261,6 +265,7 @@ set verbose=0
 " With TF, make omnicompletion the default for tabbing
 autocmd FileType terraform let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
+" === eyaml ==================================================================
 let g:eyaml_encryption_method = 'gpg'
 let g:eyaml_gpg_always_trust = 1
 let g:eyaml_gpg_recipients_file = 'hiera-eyaml-gpg.recipients'
