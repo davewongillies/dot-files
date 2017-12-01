@@ -255,6 +255,12 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 let g:terraform_fmt_on_save = 1
 let g:terraform_align = 1
 
+" Verbose mode needs to be set for terraform omnicompletion for some reason
+set verbose=0
+
+" With TF, make omnicompletion the default for tabbing
+autocmd FileType terraform let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+
 let g:eyaml_encryption_method = 'gpg'
 let g:eyaml_gpg_always_trust = 1
 let g:eyaml_gpg_recipients_file = 'hiera-eyaml-gpg.recipients'
