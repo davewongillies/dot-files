@@ -44,6 +44,7 @@ Plug 'xolox/vim-session'
 Plug 'xuhdev/SingleCompile'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'lrvick/Conque-Shell'
+Plug 'ervandew/supertab'
 
 " Themes
 Plug 'bling/vim-airline'
