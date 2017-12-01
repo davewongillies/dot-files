@@ -66,7 +66,6 @@ Plug 'tpope/vim-git'
 Plug 'gregsexton/gitv'
 
 " Syntax plugins
-" Plugin 'vim-syntastic/syntastic'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-jdaddy'
 Plug 'editorconfig/editorconfig-vim'
