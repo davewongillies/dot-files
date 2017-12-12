@@ -3,8 +3,9 @@
 set shell=/bin/bash
 
 " Vi non-compatible mode
-set nocompatible               " be iMproved
-filetype off                   " required! Don't know what the hell for though
+set nocompatible
+syntax on
+filetype plugin indent on
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -69,7 +70,7 @@ Plug 'gregsexton/gitv'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-jdaddy'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'PotatoesMaster/i3-vim-syntax'
+Plug 'davewongillies/vim-i3-syntax'
 Plug 'hashivim/vim-hashicorp-tools'
 Plug 'tpope/vim-markdown'
 Plug 'rodjek/vim-puppet'
@@ -90,8 +91,6 @@ Plug 'vim-scripts/matchit.zip'
 
 call plug#end()            " required
 
-" === File type =============================================================
-filetype plugin on
 
 " enables proper mouse support
 set ttyfast
@@ -224,7 +223,7 @@ let g:Gitv_OpenHorizontal = 0
 
 " === deoplete ===============================================================
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#complete_method = "omnifunc"
+" let g:deoplete#complete_method = "omnifunc"
 let g:deoplete#enable_yarp = 1
 
 " === Ultisnips ==============================================================
@@ -261,9 +260,6 @@ let g:terraform_align = 1
 
 " Verbose mode needs to be set for terraform omnicompletion for some reason
 set verbose=0
-
-" With TF, make omnicompletion the default for tabbing
-autocmd FileType terraform let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 " === eyaml ==================================================================
 let g:eyaml_encryption_method = 'gpg'
