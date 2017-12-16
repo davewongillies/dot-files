@@ -1,18 +1,26 @@
 #!/usr/bin/env python3
-
 import urllib.request
 import os
-
-city = "San Francisco"
-units = "Metric"
-unit_key = "C"
-
 try:
-    api_key = os.environ['OPENWEATHER_API_KEY']
-    weather = eval(str(urllib.request.urlopen("http://api.openweathermap.org/data/2.5/weather?q={}&APPID={}&units={}".format(city, api_key, units)).read())[2:-1])
-    # info = weather["weather"][0]["description"].capitalize()
-    temp = int(float(weather["main"]["temp"]))
-    print("{}°{}".format(temp, unit_key))
+    from retrying import retry
+except as e:
+    print(e)
+    exit(1)
 
-except KeyError:
-    print('No OPENWEATHER_API_KEY env var found')
+city = 'San Francisco'
+units = 'Metric'
+unit_key = 'C'
+
+@retry(wait_fixed=10000)
+def get_weather(city, units, unit_key):
+    try:
+        api_key = os.environ['OPENWEATHER_API_KEY']
+        api_url = 'http://api.openweathermap.org/data/2.5/weather'
+        weather = eval(str(urllib.request.urlopen("{}?q={}&APPID={}&units={}".format(api_url, city, api_key, units)).read())[2:-1])
+        temp = int(float(weather['main']['temp']))
+        print("{}°{}".format(temp, unit_key))
+
+    except KeyError:
+        print('No OPENWEATHER_API_KEY env var found')
+
+get_weather(city, units, unit_key)
