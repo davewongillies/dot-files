@@ -1,0 +1,9 @@
+[Unit]
+Description=Squeezelite Daemon
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/squeezelite -n "Dave's Desktop" -o pulse -d all=info
+
+[Install]
+WantedBy=default.target
