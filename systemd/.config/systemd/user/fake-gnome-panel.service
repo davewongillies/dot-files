@@ -1,0 +1,10 @@
+[Unit]
+Description=fake-gnome-panel
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/time %h/bin/fake-gnome-panel
+Restart=always
+
+[Install]
+WantedBy=default.target

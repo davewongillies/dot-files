@@ -1,0 +1,10 @@
+[Unit]
+Description=Adjusts the color temperature of your screen
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/redshift-gtk
+Restart=always
+
+[Install]
+WantedBy=default.target

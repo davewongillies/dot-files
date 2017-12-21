@@ -1,0 +1,10 @@
+[Unit]
+Description=Owncloud
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/owncloud
+Restart=always
+
+[Install]
+WantedBy=default.target

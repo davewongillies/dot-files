@@ -4,6 +4,7 @@ Description=Squeezelite Daemon
 [Service]
 Type=simple
 ExecStart=/usr/bin/squeezelite -N %h/.config/squeezelite/playername -o pulse -d all=info
+Restart=always
 
 [Install]
 WantedBy=default.target
