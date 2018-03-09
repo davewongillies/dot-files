@@ -3,14 +3,15 @@
 set shell=/bin/bash
 
 " Vi non-compatible mode
-set nocompatible
-syntax on
-filetype plugin indent on
+set nocompatible               " be iMproved
+filetype off                   " required! Don't know what the hell for though
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  augroup vimenter
+      autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  augroup END
 endif
 
 call plug#begin('~/.vim/bundle')
@@ -46,6 +47,7 @@ Plug 'xuhdev/SingleCompile'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'lrvick/Conque-Shell'
 Plug 'ervandew/supertab'
+Plug 'rhysd/committia.vim'
 
 " Themes
 Plug 'bling/vim-airline'
@@ -78,19 +80,27 @@ Plug 'juliosueiras/vim-terraform-completion'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'tolecnal/icinga2-vim'
 Plug 'dag/vim-fish'
+Plug 'kchmck/vim-coffee-script'
 
 Plug 'davewongillies/vim-gradle'
 Plug 'davewongillies/vim-eyaml'
 
 Plug 'KabbAmine/zeavim.vim'
 
+Plug 'fatih/vim-go'
+
 " vim-scripts repos
 Plug 'vim-scripts/Align'
 Plug 'vim-scripts/Gist.vim'
 Plug 'vim-scripts/matchit.zip'
 
+" testing
+Plug 'junegunn/vader.vim'
+
 call plug#end()            " required
 
+" === File type =============================================================
+filetype plugin on
 
 " enables proper mouse support
 set ttyfast
@@ -107,8 +117,8 @@ set scrolloff=20
 " Solarized colour theme
 " colorscheme solarized
 let g:solarized_termtrans = 1
-let g:solarized_contrast = "high"
-let g:solarized_visibility = "high"
+let g:solarized_contrast = 'high'
+let g:solarized_visibility = 'high'
 
 if has('gui_running')
     set guifont=Monaco\ For\ Powerline\ 10
@@ -120,9 +130,9 @@ else
 endif
 
 " jump to the last position when reopening a file
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-endif
+augroup lastpos
+    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+augroup END
 
 " === Persistent Undo =======================================================
 " Keep undo history across sessions, by storing in file.
@@ -137,21 +147,22 @@ set expandtab
 set shiftwidth=4
 set tabstop=4
 
-autocmd FileType python    setlocal smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-autocmd FileType python    setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
-autocmd FileType yaml      setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
-autocmd FileType ruby      setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
-autocmd FileType php       setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
-autocmd FileType coffee    setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
-autocmd FileType terraform setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2 commentstring=#%s
+augroup filetypes
+    autocmd FileType python    setlocal smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+    autocmd FileType python    setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
+    autocmd FileType yaml      setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
+    autocmd FileType ruby      setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
+    autocmd FileType php       setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
+    autocmd FileType coffee    setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
+    autocmd FileType terraform setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2 commentstring=#%s
 
-" Delete any whitespace at end of lines
-autocmd FileType json,sh,eruby,spec,c,cpp,python,ruby,java,yaml,javascript,html,css,coffee,haml,php,puppet,terraform autocmd BufWritePre <buffer> :%s/\s\+$//e
-autocmd BufNewFile,BufRead *.pde setf arduino
-
+    " Delete any whitespace at end of lines
+    autocmd FileType json,sh,eruby,spec,c,cpp,python,ruby,java,yaml,javascript,html,css,coffee,haml,php,puppet,terraform autocmd BufWritePre <buffer> :%s/\s\+$//e
+    autocmd BufNewFile,BufRead *.pde setf arduino
+augroup END
 " === Syntax settings ========================================================
 " Syntax highlighting
-if has("syntax")
+if has('syntax')
   syntax on
   let g:airline#extensions#ale#enabled = 1
   nmap <silent> <C-k> <Plug>(ale_previous_wrap)
@@ -195,8 +206,10 @@ scriptencoding utf-8
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
 
 " If we make mods to ~/.vimrc, vim reloads the changes
-autocmd BufWritePost .vimrc so ~/.vimrc
-autocmd BufWritePost .gvimrc so ~/.gvimrc
+augroup vim_reload
+    autocmd BufWritePost .vimrc so ~/.vimrc
+    autocmd BufWritePost .gvimrc so ~/.gvimrc
+augroup END
 
 " === List ===================================================================
 " We set the list then show special chars
@@ -205,9 +218,16 @@ set list listchars=trail:.,precedes:«,extends:»,eol:↲,tab:\░\░
 " === NERDTree ===============================================================
 " toggle NERDTree
 map <C-n> :NERDTreeToggle<cr>
-let NERDTreeShowHidden = 0
+let g:NERDTreeShowHidden = 0
 " Open NERDTree on startup
-let g:nerdtree_tabs_open_on_console_startup=1
+"
+" let g:nerdtree_tabs_open_on_console_startup=1
+
+" Doesn't open nerdtree on git commits
+augroup nerdtree
+    autocmd VimEnter * if &filetype !=# 'gitcommit' | NERDTree | endif
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup END
 
 " Can't remember why I've set these
 set hlsearch
@@ -223,16 +243,17 @@ let g:Gitv_OpenHorizontal = 0
 
 " === deoplete ===============================================================
 let g:deoplete#enable_at_startup = 1
-" let g:deoplete#complete_method = "omnifunc"
+" let g:deoplete#complete_method = 'omnifunc'
 let g:deoplete#enable_yarp = 1
+call deoplete#initialize()
 
 " === Ultisnips ==============================================================
-let g:UltiSnipsExpandTrigger = "<nop>"
+let g:UltiSnipsExpandTrigger = '<nop>'
 let g:ulti_expand_or_jump_res = 0
 function! ExpandSnippetOrCarriageReturn()
-    let snippet = UltiSnips#ExpandSnippetOrJump()
+    let l:snippet = UltiSnips#ExpandSnippetOrJump()
     if g:ulti_expand_or_jump_res > 0
-        return snippet
+        return l:snippet
     else
         return "\<CR>"
     endif
@@ -241,9 +262,12 @@ endfunction
 inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
 
 " === tagbar =================================================================
-autocmd VimEnter * nested :call tagbar#autoopen(1)
-autocmd FileType * nested :call tagbar#autoopen(0)
-" autocmd BufEnter * nested :call tagbar#autoopen(0)
+augroup tagbar
+    autocmd VimEnter * nested :call tagbar#autoopen(1)
+    autocmd FileType * nested :call tagbar#autoopen(0)
+    " autocmd BufEnter * nested :call tagbar#autoopen(0)
+augroup END
+
 let g:tagbar_compact = 1
 
 " === Ctrl-P =================================================================
@@ -251,15 +275,22 @@ let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
                           \ 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
 
 " === terraform ==============================================================
-" (Optional)Hide Info(Preview) window after completions
-autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+augroup misc
+    " (Optional)Hide Info(Preview) window after completions
+    autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+    autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+augroup END
 
 let g:terraform_fmt_on_save = 1
 let g:terraform_align = 1
 
 " Verbose mode needs to be set for terraform omnicompletion for some reason
 set verbose=0
+
+" With TF, make omnicompletion the default for tabbing
+" autocmd FileType terraform let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
+let g:deoplete#omni_patterns = {}
+let g:deoplete#omni_patterns.terraform = '[^ *\t"{=$]\w*'
 
 " === eyaml ==================================================================
 let g:eyaml_encryption_method = 'gpg'
