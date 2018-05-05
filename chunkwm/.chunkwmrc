@@ -13,6 +13,7 @@ chunkc core::plugin_dir /usr/local/opt/chunkwm/share/chunkwm/plugins
 #
 
 chunkc core::hotload 1
+chunkc core::log_file /usr/local/var/log/chunkwm/chunkwm.log
 chunkc core::unload tiling.so
 chunkc core::unload ffm.so
 chunkc core::unload border.so
@@ -22,8 +23,7 @@ chunkc core::unload border.so
 #
 
 chunkc set global_desktop_mode           bsp
-chunkc set 2_desktop_mode                monocle
-chunkc set 5_desktop_mode                float
+chunkc set 3_desktop_mode                monocle
 
 chunkc set global_desktop_offset_top     4
 chunkc set global_desktop_offset_bottom  4
