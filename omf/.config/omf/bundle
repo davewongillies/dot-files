@@ -3,7 +3,6 @@ package bak
 package bang-bang
 package config
 package direnv
-package docker-machine
 package fasd
 package gi
 package https://github.com/davewongillies/plugin-awsmfa
@@ -17,8 +16,7 @@ package rustup
 package spark
 package tab
 package title
-package vundle
 package weather
 theme agnoster
+theme bobthefish
 theme default
-theme https://github.com/davewongillies/theme-bobthefish
