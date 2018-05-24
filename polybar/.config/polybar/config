@@ -58,6 +58,10 @@ modules-center =
 modules-right = gpmdp volume memory loadavg temperature weather battery time
 inherit = bar/default
 
+[bar/DP-1]
+monitor = DP-1
+inherit = bar/default
+
 [bar/DP-1.1.8]
 monitor = DP-1.1.8
 modules-right = gpmdp
