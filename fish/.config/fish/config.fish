@@ -1,7 +1,7 @@
 # Thanks, I know you're friendly
 set fish_greeting ""
 
-set PATHS ~/.rbenv/bin ~/.gem/ruby/2.3.0/bin ~/.gem/ruby/2.1.0/bin ~/go/bin
+set PATHS ~/bin ~/.rbenv/bin ~/.gem/ruby/2.3.0/bin ~/.gem/ruby/2.1.0/bin ~/go/bin ~/.linuxbrew/bin
 for path in $PATHS
     test -d $path
       and set -gx PATH $path $PATH
