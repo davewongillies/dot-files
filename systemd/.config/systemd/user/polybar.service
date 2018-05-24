@@ -1,9 +1,9 @@
 [Unit]
-Description=Zeal
+Description=Polybar
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/polybar --log=warning --reload LVDS-1
+ExecStart=/usr/bin/polybar --log=warning --reload default
 Restart=always
 
 [Install]
