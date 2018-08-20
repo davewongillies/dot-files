@@ -1,7 +1,3 @@
-" I have to set shell to /bin/bash because I use fish
-" and vundle doesn't like non-POSIX shells
-set shell=/bin/bash
-
 " Vi non-compatible mode
 set nocompatible               " be iMproved
 filetype off                   " required! Don't know what the hell for though
@@ -45,7 +41,6 @@ Plug 'tsaleh/vim-tmux'
 Plug 'xolox/vim-session'
 Plug 'xuhdev/SingleCompile'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'lrvick/Conque-Shell'
 Plug 'ervandew/supertab'
 Plug 'rhysd/committia.vim'
 
@@ -81,6 +76,7 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'tolecnal/icinga2-vim'
 Plug 'dag/vim-fish'
 Plug 'kchmck/vim-coffee-script'
+Plug 'Glench/Vim-Jinja2-Syntax'
 
 Plug 'davewongillies/vim-gradle'
 Plug 'davewongillies/vim-eyaml'
@@ -126,7 +122,9 @@ if has('gui_running')
     " GUI Option to remove the Toolbar (T)
     set guioptions-=T
 else
+    let g:solarized_termcolors=256
     set background=dark
+    " colorscheme solarized
 endif
 
 " jump to the last position when reopening a file
@@ -296,3 +294,13 @@ let g:deoplete#omni_patterns.terraform = '[^ *\t"{=$]\w*'
 let g:eyaml_encryption_method = 'gpg'
 let g:eyaml_gpg_always_trust = 1
 let g:eyaml_gpg_recipients_file = 'hiera-eyaml-gpg.recipients'
+
+
+highlight badWords ctermbg=red ctermfg=white
+fun! HiBadWords()
+    match badWords /\c\<\(obviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however\|so,\|easy\)\>/
+endfun
+
+" obviously
+autocmd InsertEnter *.md call HiBadWords()
+autocmd InsertLeave *.md call HiBadWords()

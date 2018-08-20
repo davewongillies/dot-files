@@ -39,7 +39,7 @@ module-margin = 1
 
 modules-left = my-text i3
 modules-center = 
-modules-right = volume memory filesystem loadavg temperature weather battery date
+modules-right = crm volume memory filesystem loadavg temperature weather battery date
 
 wm-restack = i3
 override-redirect = false
@@ -70,7 +70,7 @@ inherit = bar/default
 
 [bar/DP-1.8]
 monitor = DP-1.8
-modules-right = volume memory loadavg temperature weather eth date
+modules-right = crm volume memory loadavg temperature weather eth date
 
 inherit = bar/default
 padding-right = 2
@@ -467,5 +467,11 @@ interval = 600
 type = custom/text
 content = " "
 content-padding = 0
+
+[module/crm]
+type = custom/script
+format-prefix = " CRM "
+exec = curl -s https://api.iextrading.com/1.0/stock/crm/price
+interval = 300
 
 ; vim:ft=dosini

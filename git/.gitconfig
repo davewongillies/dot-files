@@ -12,6 +12,7 @@
     logs = log --topo-order --stat
     ; ediff = !git diff $1 | eyaml decrypt --stdin
     ediff = "!f() { git diff HEAD~1 \"$1\"|eyaml decrypt --stdin; }; f"
+    push-empty = !git commit --allow-empty -m 'Retrigger' ; git push
 
 [push]
     default = current
