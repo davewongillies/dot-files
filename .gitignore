@@ -20,3 +20,13 @@ fish/.config/fish/functions
 
 # systemd
 systemd/.config/systemd/user/default.target.wants
+
+# home-assistant
+home-assistant/.config/home-assistant/*.conf
+home-assistant/.config/home-assistant/*.db
+home-assistant/.config/home-assistant/*.log
+home-assistant/.config/home-assistant/.HA_VERSION
+home-assistant/.config/home-assistant/.storage
+home-assistant/.config/home-assistant/.uuid
+home-assistant/.config/home-assistant/known_devices.yaml
+home-assistant/.config/home-assistant/secrets.yaml

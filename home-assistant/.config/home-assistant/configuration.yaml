@@ -1,0 +1,135 @@
+---
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret lat
+  longitude: !secret lon
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 71
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here:
+  # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/Los_Angeles
+  # Customization file
+  customize: !include customize.yaml
+
+# Show links to resources in log and frontend
+# introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+# Secrets are defined in the file secrets.yaml
+# api_password: !secret http_password
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+# Optional, allows Home Assistant developers to focus on popular components.
+# include_used_components: true
+
+# Discover some devices automatically
+discovery:
+  ignore:
+    - sonos
+    - samsung_tv
+    - apple_tv
+    - axis
+    - belkin_wemo
+    - roku
+    - songpal
+    - wink
+    - yamaha
+    - yeelight
+
+zeroconf:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Weather prediction
+sensor:
+  - platform: openweathermap
+    api_key: !secret owm_api_key
+    monitored_conditions:
+      - temperature
+  - platform: transmission
+    host: 192.168.1.55
+    monitored_variables:
+      - 'current_status'
+      - 'download_speed'
+      - 'upload_speed'
+      - 'active_torrents'
+  - platform: fitbit
+    clock_format: 12H
+    monitored_resources:
+      - 'body/weight'
+  - platform: bitcoin
+    display_options:
+      - exchangerate
+
+  - platform: worldclock
+    time_zone: Australia/Sydney
+
+weather:
+  - platform: openweathermap
+    api_key: !secret owm_api_key
+
+# Text to speech
+tts:
+  - platform: google
+
+media_player:
+  - platform: braviatv
+    host: 192.168.1.14
+
+  - platform: kodi
+    host: 192.168.1.14
+
+device_tracker:
+  - platform: netgear
+    host: 192.168.1.1
+    username: admin
+    password: !secret router_password
+    port: 80
+    interval_seconds: 300
+    consider_home: 301
+
+switch:
+  platform: transmission
+  host: 192.168.1.55
+
+shopping_list:
+
+# remote:
+# - platform: harmony
+# name: Living Room
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+recorder:
+  purge_keep_days: 8
