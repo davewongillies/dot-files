@@ -80,6 +80,7 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 
 Plug 'davewongillies/vim-gradle'
 Plug 'davewongillies/vim-eyaml'
+Plug 'vim-scripts/bats.vim'
 
 Plug 'KabbAmine/zeavim.vim'
 
