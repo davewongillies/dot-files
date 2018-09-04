@@ -29,8 +29,9 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 
-Plug 'godlygeek/tabular'
-Plug 'jamessan/vim-gnupg'
+" Vim script for text filtering and alignment
+" Plug 'godlygeek/tabular'
+" Plug 'jamessan/vim-gnupg'
 Plug 'kana/vim-smartinput'
 Plug 'myusuf3/numbers.vim'
 Plug 'rking/ag.vim'
@@ -38,11 +39,10 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tsaleh/vim-tmux'
-Plug 'xolox/vim-session'
-Plug 'xuhdev/SingleCompile'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
 Plug 'rhysd/committia.vim'
+Plug 'KabbAmine/zeavim.vim'
 
 " Themes
 Plug 'bling/vim-airline'
@@ -52,7 +52,7 @@ Plug 'altercation/vim-colors-solarized'
 
 " Nerdtree
 Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
+" Plug 'jistr/vim-nerdtree-tabs'
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -64,27 +64,24 @@ Plug 'tpope/vim-git'
 Plug 'gregsexton/gitv'
 
 " Syntax plugins
-Plug 'w0rp/ale'
-Plug 'tpope/vim-jdaddy'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'davewongillies/vim-i3-syntax'
-Plug 'hashivim/vim-hashicorp-tools'
-Plug 'tpope/vim-markdown'
-Plug 'rodjek/vim-puppet'
-Plug 'juliosueiras/vim-terraform-completion'
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'tolecnal/icinga2-vim'
 Plug 'dag/vim-fish'
-Plug 'kchmck/vim-coffee-script'
-Plug 'Glench/Vim-Jinja2-Syntax'
-
-Plug 'davewongillies/vim-gradle'
 Plug 'davewongillies/vim-eyaml'
-Plug 'vim-scripts/bats.vim'
-
-Plug 'KabbAmine/zeavim.vim'
-
+Plug 'davewongillies/vim-gradle'
+Plug 'davewongillies/vim-i3-syntax'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'ekalinin/Dockerfile.vim'
 Plug 'fatih/vim-go'
+Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'hashivim/vim-hashicorp-tools'
+Plug 'juliosueiras/vim-terraform-completion'
+Plug 'KabbAmine/zeavim.vim'
+Plug 'kchmck/vim-coffee-script'
+Plug 'rodjek/vim-puppet'
+Plug 'tolecnal/icinga2-vim'
+Plug 'tpope/vim-jdaddy'
+Plug 'tpope/vim-markdown'
+Plug 'vim-scripts/bats.vim'
+Plug 'w0rp/ale'
 
 " vim-scripts repos
 Plug 'vim-scripts/Align'
@@ -92,7 +89,7 @@ Plug 'vim-scripts/Gist.vim'
 Plug 'vim-scripts/matchit.zip'
 
 " testing
-Plug 'junegunn/vader.vim'
+" Plug 'junegunn/vader.vim'
 
 call plug#end()            " required
 
@@ -240,6 +237,8 @@ let g:session_autosave='no'
 " === gitv ===================================================================
 let g:Gitv_OpenHorizontal = 0
 
+
+let g:python3_host_prog = '/usr/bin/python3'
 " === deoplete ===============================================================
 let g:deoplete#enable_at_startup = 1
 " let g:deoplete#complete_method = 'omnifunc'
@@ -305,5 +304,10 @@ fun! HiBadWords()
 endfun
 
 " obviously
-autocmd InsertEnter *.md call HiBadWords()
-autocmd InsertLeave *.md call HiBadWords()
+augroup badwords
+    autocmd InsertEnter *.md call HiBadWords()
+    autocmd InsertLeave *.md call HiBadWords()
+augroup END
+
+set splitbelow
+set termwinsize=20x0
