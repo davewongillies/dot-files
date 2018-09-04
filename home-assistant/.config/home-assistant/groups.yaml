@@ -1,0 +1,7 @@
+---
+media:
+  view: yes
+  name: Media
+  entities:
+    - media_player.bedroom_boom
+    - media_player.daves_desktop

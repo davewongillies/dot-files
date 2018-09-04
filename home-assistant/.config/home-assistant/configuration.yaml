@@ -39,108 +39,39 @@ updater:
 # Optional, allows Home Assistant developers to focus on popular components.
 # include_used_components: true
 
-# Discover some devices automatically
-discovery:
-  ignore:
-    - sonos
-    - samsung_tv
-    - apple_tv
-    - axis
-    - belkin_wemo
-    - roku
-    - songpal
-    - wink
-    - yamaha
-    - yeelight
-
-zeroconf:
-
+automation: !include automations.yaml
+cloud:
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
-
+device_tracker: !include device_trackers.yaml
+# Discover some devices automatically
+discovery: !include discovery.yaml
+group: !include groups.yaml
 # Enables support for tracking state changes over time
 history:
-
 # View all events in a logbook
 logbook:
-
 # Enables a map showing the location of tracked devices
 map:
-
-# Track the sun
-sun:
-
-# Weather prediction
-sensor:
-  - platform: openweathermap
-    api_key: !secret owm_api_key
-    monitored_conditions:
-      - temperature
-  - platform: transmission
-    host: 192.168.1.55
-    monitored_variables:
-      - 'current_status'
-      - 'download_speed'
-      - 'upload_speed'
-      - 'active_torrents'
-  - platform: fitbit
-    clock_format: 12H
-    monitored_resources:
-      - 'body/weight'
-  - platform: worldclock
-    time_zone: Australia/Sydney
-
-  - platform: pollen
-    zip_code: '94118'
-    monitored_conditions:
-      - allergy_index_today
-      - allergy_index_tomorrow
-      - allergy_index_yesterday
-
-weather:
-  - platform: openweathermap
-    api_key: !secret owm_api_key
-
-# Text to speech
-tts:
-  - platform: google
-
+media_extractor: !include media_extractor.yaml
 media_player:
   - platform: braviatv
     host: 192.168.1.14
-
-  - platform: kodi
-    host: 192.168.1.14
-
-device_tracker:
-  - platform: netgear
-    host: 192.168.1.1
-    username: admin
-    password: !secret router_password
-    port: 80
-    interval_seconds: 300
-    consider_home: 301
-  - platform: tile
-    username: !secret tile_username
-    password: !secret tile_password
-    # Needed to set show_inactive to true otherwise
-    # the plugin would only show me a single old device
-    show_inactive: true
-
-switch:
-  platform: transmission
-  host: 192.168.1.55
-
-shopping_list:
-
+notify: !include notify.yaml
+recorder:
+  purge_keep_days: 8
 # remote:
 # - platform: harmony
 # name: Living Room
-
-group: !include groups.yaml
-automation: !include automations.yaml
 script: !include scripts.yaml
-recorder:
-  purge_keep_days: 8
-cloud:
+sensor: !include sensors.yaml
+# Track the sun
+sun:
+# Text to speech
+tts:
+  - platform: google
+weather:
+  - platform: openweathermap
+    api_key: !secret owm_api_key
 weblink: !include weblinks.yaml
+zeroconf:

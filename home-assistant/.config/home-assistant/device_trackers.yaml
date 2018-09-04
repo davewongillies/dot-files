@@ -1,0 +1,14 @@
+---
+- platform: netgear
+  host: 192.168.1.1
+  username: admin
+  password: !secret router_password
+  port: 80
+  interval_seconds: 300
+  consider_home: 301
+- platform: tile
+  username: !secret tile_username
+  password: !secret tile_password
+  # Needed to set show_inactive to true otherwise
+  # the plugin would only show me a single old device
+  show_inactive: true

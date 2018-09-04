@@ -1,0 +1,30 @@
+---
+ignore:
+  - apple_tv
+  - axis
+  - belkin_wemo
+  - bluesound
+  - bose_soundtouch
+  - denonavr
+  - directv
+  - frontier_silicon
+  # - google_cast: Google Cast
+  # - harmony: Logitech Harmony Hub
+  - ikea_tradfri
+  # - logitech_mediaserver: Logitech media server (Squeezebox)
+  # - netgear_router: Netgear routers
+  - openhome
+  - panasonic_viera
+  - philips_hue
+  # - plex_mediaserver: Plex media server
+  - roku
+  - sabnzbd
+  - samsung_printer
+  - samsung_tv
+  - sonos
+  - songpal
+  - tellstick
+  - wink
+  - yamaha
+  - yeelight
+  - xiaomi_gw
