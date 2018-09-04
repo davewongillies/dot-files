@@ -140,3 +140,4 @@ script: !include scripts.yaml
 recorder:
   purge_keep_days: 8
 cloud:
+weblink: !include weblinks.yaml
