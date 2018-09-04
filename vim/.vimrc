@@ -52,7 +52,7 @@ Plug 'altercation/vim-colors-solarized'
 
 " Nerdtree
 Plug 'scrooloose/nerdtree'
-" Plug 'jistr/vim-nerdtree-tabs'
+Plug 'jistr/vim-nerdtree-tabs'
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -64,6 +64,8 @@ Plug 'tpope/vim-git'
 Plug 'gregsexton/gitv'
 
 " Syntax plugins
+Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'KabbAmine/zeavim.vim'
 Plug 'dag/vim-fish'
 Plug 'davewongillies/vim-eyaml'
 Plug 'davewongillies/vim-gradle'
@@ -71,10 +73,8 @@ Plug 'davewongillies/vim-i3-syntax'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'fatih/vim-go'
-Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'hashivim/vim-hashicorp-tools'
 Plug 'juliosueiras/vim-terraform-completion'
-Plug 'KabbAmine/zeavim.vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'rodjek/vim-puppet'
 Plug 'tolecnal/icinga2-vim'
@@ -89,7 +89,7 @@ Plug 'vim-scripts/Gist.vim'
 Plug 'vim-scripts/matchit.zip'
 
 " testing
-" Plug 'junegunn/vader.vim'
+Plug 'junegunn/vader.vim'
 
 call plug#end()            " required
 
@@ -146,6 +146,7 @@ set tabstop=4
 augroup filetypes
     autocmd FileType python    setlocal smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
     autocmd FileType python    setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
+    autocmd FileType python    let b:ale_fixers = ['flake8', 'yapf']
     autocmd FileType yaml      setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
     autocmd FileType ruby      setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
     autocmd FileType php       setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
@@ -232,19 +233,15 @@ set ignorecase
 set smartcase
 
 " === vim-session ============================================================
-let g:session_autosave='no'
+let g:session_autosave='yes'
 
 " === gitv ===================================================================
 let g:Gitv_OpenHorizontal = 0
 
-
-let g:python3_host_prog = '/usr/bin/python3'
 " === deoplete ===============================================================
 let g:deoplete#enable_at_startup = 1
-" let g:deoplete#complete_method = 'omnifunc'
+let g:deoplete#complete_method = 'omnifunc'
 let g:deoplete#enable_yarp = 1
-let g:python3_host_prog = '/usr/bin/python3'
-let g:python_host_prog = '/usr/bin/python'
 call deoplete#initialize()
 
 " === Ultisnips ==============================================================
@@ -309,5 +306,6 @@ augroup badwords
     autocmd InsertLeave *.md call HiBadWords()
 augroup END
 
+" === Terminal =============
 set splitbelow
-set termwinsize=20x0
+set termwinsize=15x0
