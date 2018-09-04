@@ -87,12 +87,15 @@ sensor:
     clock_format: 12H
     monitored_resources:
       - 'body/weight'
-  - platform: bitcoin
-    display_options:
-      - exchangerate
-
   - platform: worldclock
     time_zone: Australia/Sydney
+
+  - platform: pollen
+    zip_code: '94118'
+    monitored_conditions:
+      - allergy_index_today
+      - allergy_index_tomorrow
+      - allergy_index_yesterday
 
 weather:
   - platform: openweathermap
@@ -117,6 +120,9 @@ device_tracker:
     port: 80
     interval_seconds: 300
     consider_home: 301
+  - platform: tile
+    username: !secret tile_username
+    password: !secret tile_password
 
 switch:
   platform: transmission
@@ -133,3 +139,4 @@ automation: !include automations.yaml
 script: !include scripts.yaml
 recorder:
   purge_keep_days: 8
+cloud:
