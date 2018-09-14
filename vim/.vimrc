@@ -1,4 +1,5 @@
 " Vi non-compatible mode
+set shell=bash
 set nocompatible               " be iMproved
 filetype off                   " required! Don't know what the hell for though
 
@@ -48,11 +49,12 @@ Plug 'KabbAmine/zeavim.vim'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
-Plug 'altercation/vim-colors-solarized'
+Plug 'lifepillar/vim-solarized8'
 
 " Nerdtree
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -66,6 +68,7 @@ Plug 'gregsexton/gitv'
 " Syntax plugins
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'KabbAmine/zeavim.vim'
+Plug 'aliou/bats.vim'
 Plug 'dag/vim-fish'
 Plug 'davewongillies/vim-eyaml'
 Plug 'davewongillies/vim-gradle'
@@ -77,10 +80,11 @@ Plug 'hashivim/vim-hashicorp-tools'
 Plug 'juliosueiras/vim-terraform-completion'
 Plug 'kchmck/vim-coffee-script'
 Plug 'rodjek/vim-puppet'
+Plug 'sophacles/vim-processing'
+Plug 'stevearc/vim-arduino'
 Plug 'tolecnal/icinga2-vim'
 Plug 'tpope/vim-jdaddy'
 Plug 'tpope/vim-markdown'
-Plug 'vim-scripts/bats.vim'
 Plug 'w0rp/ale'
 
 " vim-scripts repos
@@ -104,26 +108,21 @@ set showcmd        " Show (partial) command in status line.
 set number         " Line numbers
 set cursorline
 set nofoldenable   " disable folds
-" set colorcolumn=80 " display a vertical coloured column at 80
+set colorcolumn=81 " display a vertical coloured column at 81
 set scrolloff=20
 
 " === Solarized ==============================================================
 " Solarized colour theme
-" colorscheme solarized
+set background=dark
+set termguicolors
+colorscheme solarized8
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+let g:solarized_old_cursor_style=1
 let g:solarized_termtrans = 1
 let g:solarized_contrast = 'high'
 let g:solarized_visibility = 'high'
-
-if has('gui_running')
-    set guifont=Monaco\ For\ Powerline\ 10
-    set background=light
-    " GUI Option to remove the Toolbar (T)
-    set guioptions-=T
-else
-    let g:solarized_termcolors=256
-    set background=dark
-    " colorscheme solarized
-endif
+" let g:solarized_termcolors=256
 
 " jump to the last position when reopening a file
 augroup lastpos
@@ -138,24 +137,20 @@ set undodir=~/.vim/backups
 set undofile
 
 " === Indentation ===========================================================
-" Default to 4 spaces for soft tabs
+" Default to 2 spaces for soft tabs
 set expandtab
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set softtabstop=2
+set tabstop=8
 
 augroup filetypes
-    autocmd FileType python    setlocal smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-    autocmd FileType python    setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
-    autocmd FileType python    let b:ale_fixers = ['flake8', 'yapf']
-    autocmd FileType yaml      setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
-    autocmd FileType ruby      setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
-    autocmd FileType php       setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
-    autocmd FileType coffee    setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2
-    autocmd FileType terraform setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2 commentstring=#%s
+  autocmd FileType python    setlocal smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+  autocmd FileType python    setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
+  autocmd FileType python    let b:ale_fixers = ['flake8', 'yapf']
+  autocmd FileType terraform setlocal tabstop=8 expandtab shiftwidth=2 softtabstop=2 commentstring=#%s
 
-    " Delete any whitespace at end of lines
-    autocmd FileType json,sh,eruby,spec,c,cpp,python,ruby,java,yaml,javascript,html,css,coffee,haml,php,puppet,terraform autocmd BufWritePre <buffer> :%s/\s\+$//e
-    autocmd BufNewFile,BufRead *.pde setf arduino
+  " Delete any whitespace at end of lines
+  autocmd FileType json,sh,eruby,spec,c,cpp,python,ruby,java,yaml,javascript,html,css,coffee,haml,php,puppet,terraform autocmd BufWritePre <buffer> :%s/\s\+$//e
 augroup END
 " === Syntax settings ========================================================
 " Syntax highlighting
@@ -200,7 +195,7 @@ let g:airline_powerline_fonts = 1
 set laststatus=2   " Always show the statusline
 set encoding=utf-8 " Necessary to show unicode glyphs
 scriptencoding utf-8
-set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
+" set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
 
 " If we make mods to ~/.vimrc, vim reloads the changes
 augroup vim_reload
@@ -223,6 +218,7 @@ let g:NERDTreeShowHidden = 0
 " Doesn't open nerdtree on git commits
 augroup nerdtree
     autocmd VimEnter * if &filetype !=# 'gitcommit' | NERDTree | endif
+    " Closes vim is nerdtree is the last window open
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 augroup END
 
@@ -231,9 +227,6 @@ set hlsearch
 set showcmd
 set ignorecase
 set smartcase
-
-" === vim-session ============================================================
-let g:session_autosave='yes'
 
 " === gitv ===================================================================
 let g:Gitv_OpenHorizontal = 0
@@ -308,4 +301,4 @@ augroup END
 
 " === Terminal =============
 set splitbelow
-set termwinsize=15x0
+set termwinsize=20x0
