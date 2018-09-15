@@ -1,9 +1,9 @@
 # vim
 
-Currently using vim from this PPA:
+This config has only been tested on vim 8.x
 
 ```
-sudo add-apt-repository ppa:jonathonf/vim
-sudo apt-get update
-sudo apt-get install vim
+brew install vim
 ```
+
+![](vim.png)
