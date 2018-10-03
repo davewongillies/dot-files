@@ -64,6 +64,7 @@ Plug 'honza/vim-snippets'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'gregsexton/gitv'
+Plug 'airblade/vim-gitgutter'
 
 " Syntax plugins
 Plug 'Glench/Vim-Jinja2-Syntax'
@@ -85,6 +86,7 @@ Plug 'stevearc/vim-arduino'
 Plug 'tolecnal/icinga2-vim'
 Plug 'tpope/vim-jdaddy'
 Plug 'tpope/vim-markdown'
+Plug 'mindriot101/vim-yapf'
 Plug 'w0rp/ale'
 
 " vim-scripts repos
@@ -141,7 +143,7 @@ set undofile
 set expandtab
 set shiftwidth=2
 set softtabstop=2
-set tabstop=8
+set tabstop=4
 
 augroup filetypes
   autocmd FileType python    setlocal smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
