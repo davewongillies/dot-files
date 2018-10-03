@@ -1,48 +1,49 @@
+[include]
+  path = ~/.git/local_config
+
 [user]
-    name = David Gillies
-    signingkey = 21499650C3010361395A406EFFE50B78D42FD949
+  name = David Gillies
+  signingkey = 21499650C3010361395A406EFFE50B78D42FD949
 
 [commit]
-    gpgsign = false
+  gpgsign = false
 
 [core]
-    editor = vim
+  editor = vim
 
 [alias]
-    logs = log --topo-order --stat
-    ; ediff = !git diff $1 | eyaml decrypt --stdin
-    ediff = "!f() { git diff HEAD~1 \"$1\"|eyaml decrypt --stdin; }; f"
-    push-empty = !git commit --allow-empty -m 'Retrigger' ; git push
+  logs = log --topo-order --stat
+  push-empty = "!git commit --allow-empty -m 'Retrigger' ; git push"
 
 [push]
-    default = current
+  default = current
 
 [merge]
-    tool = meld
+  tool = meld
 
 [diff]
-    tool = meld
+  tool = meld
 
 [difftool]
-    prompt = false
+  prompt = false
 
 [branch "master"]
-    remote = origin
-    merge = refs/heads/master
+  remote = origin
+  merge = refs/heads/master
 
 [color]
-    branch = auto
-    diff = auto
-    grep = auto
-    interactive = auto
-    pager = true
-    showbranch = auto
-    status = auto
-    ui = auto
+  branch = auto
+  diff = auto
+  grep = auto
+  interactive = auto
+  pager = true
+  showbranch = auto
+  status = auto
+  ui = auto
 
 [log]
-    decorate = auto
-    showSignature = false
+  decorate = auto
+  showSignature = false
 
 [gpg]
-	program = gpg2
+  program = gpg2
