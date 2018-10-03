@@ -219,4 +219,4 @@ rofi.fake-transparency:              false
 ! rofi.display-windowcd:               
 ! "The display name of this browser" Set from: Default
 rofi.display-combi:                  
-#include "/usr/share//rofi/themes//solarized_alternate.theme"
+#include "/usr/share/rofi/themes/solarized_alternate.theme"
