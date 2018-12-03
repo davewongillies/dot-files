@@ -50,6 +50,7 @@ Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
 Plug 'lifepillar/vim-solarized8'
+Plug 'ryanoasis/vim-devicons'
 
 " Nerdtree
 Plug 'scrooloose/nerdtree'
@@ -80,13 +81,14 @@ Plug 'fatih/vim-go'
 Plug 'hashivim/vim-hashicorp-tools'
 Plug 'juliosueiras/vim-terraform-completion'
 Plug 'kchmck/vim-coffee-script'
+Plug 'mindriot101/vim-yapf'
+Plug 'mzlogin/vim-markdown-toc'
 Plug 'rodjek/vim-puppet'
 Plug 'sophacles/vim-processing'
 Plug 'stevearc/vim-arduino'
 Plug 'tolecnal/icinga2-vim'
 Plug 'tpope/vim-jdaddy'
 Plug 'tpope/vim-markdown'
-Plug 'mindriot101/vim-yapf'
 Plug 'w0rp/ale'
 
 " vim-scripts repos
@@ -197,7 +199,7 @@ let g:airline#extensions#tabline#tab_min_count = 2
 let g:airline_powerline_fonts = 1
 
 set laststatus=2   " Always show the statusline
-set encoding=utf-8 " Necessary to show unicode glyphs
+set encoding=UTF-8 " Necessary to show unicode glyphs
 scriptencoding utf-8
 " set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
 
