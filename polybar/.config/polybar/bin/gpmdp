@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+status="$(gpmdp status)"
+
+
+if [[ "${status}" == *"Currently playing:"* ]]; then
+  gpmdp pause
+elif [[ "${status}" == *"Playback paused"* ]]; then
+  gpmdp play
+fi

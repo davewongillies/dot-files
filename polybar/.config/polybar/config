@@ -20,12 +20,12 @@ alert = #bd2c40
 
 [bar/default]
 width = 100%
-height = 27
+; height = 27
 radius = 0
 fixed-center = false
 background = ${colors.background}
 foreground = ${colors.foreground}
-line-size = 2
+; line-size = 2
 line-color = #f00
 border-size = 0
 border-color = #00000000
@@ -167,12 +167,12 @@ label-urgent = %index%
 label-urgent-background = ${module/bspwm.label-urgent-background}
 label-urgent-padding = ${module/bspwm.label-urgent-padding}
 
-ws-icon-0 = -1;⚀
-ws-icon-1 = 2;⚁
-ws-icon-2 = 3;⚂
-ws-icon-3 = 4;⚃
-ws-icon-4 = 5;⚄
-ws-icon-5 = 6;⚅
+; ws-icon-0 = -1;⚀
+; ws-icon-1 = 2;⚁
+; ws-icon-2 = 3;⚂
+; ws-icon-3 = 4;⚃
+; ws-icon-4 = 5;⚄
+; ws-icon-5 = 6;⚅
 
 
 [module/mpd]
@@ -298,7 +298,7 @@ label = "%date% %time% "
 type = internal/date
 interval = 5
 
-date = " %Y-%m-%d"
+date = "%{A1:sensible-browser "https\://calendar.google.com":}%{A} %Y-%m-%d"
 date-alt = " %Y-%m-%d"
 
 time = " %r"
@@ -451,27 +451,48 @@ type = custom/script
 exec = cut -d' ' -f1 /proc/loadavg
 format-prefix = " "
 format-underline = #f90000
+click-left = gnome-system-monitor
 
 [module/gpmdp]
+format-prefix = 
+format-suffix = "  "
+format-background = #586e75
+format-foreground = #002b36
+; background = #002b36
+; background-alt = #586e75
+
+; foreground = #dfdfdf
+; foreground-alt = #555
+
+; format-suffix-background = 
+; format-prefix-background = 
+; format-background = 
 type = custom/script
-exec = ~/bin/playing.sh
+exec = ~/.config/polybar/bin/playing
 tail = true
+click-left = ~/.config/polybar/bin/gpmdp
+; scroll-up =
+;; scroll-down =
 
 [module/weather]
 type = custom/script
-exec = ~/bin/weather
+exec = ~/.config/polybar/bin/weather
 format-prefix = " "
 interval = 600
+click-left = sensible-browser https://darksky.net
 
 [module/my-text]
 type = custom/text
 content = " "
 content-padding = 0
+click-left = rofi -show combi -modi combi
 
 [module/crm]
 type = custom/script
-format-prefix = " CRM "
-exec = curl -s https://api.iextrading.com/1.0/stock/crm/price
+exec = ~/.config/polybar/bin/crm_stock
 interval = 300
+format-underline = #009edb
+; click-left = echo left %counter%
+click-left = sensible-browser https://iextrading.com/apps/stocks/CRM
 
 ; vim:ft=dosini

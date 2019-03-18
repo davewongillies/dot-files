@@ -1,0 +1,3 @@
+#!/bin/bash
+cd ~/Source/personal/stock-sparklines
+env POLYBAR=True pipenv run ./get_chart.py
