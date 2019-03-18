@@ -9,6 +9,7 @@ package docker-machine
 package expand
 package fasd
 package gi
+package git@github.com:aliz-ai/google-cloud-sdk-fish-completion.git
 package https://github.com/davewongillies/plugin-awsmfa
 package https://github.com/edc/bass
 package hub
