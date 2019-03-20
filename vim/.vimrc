@@ -78,7 +78,7 @@ Plug 'davewongillies/vim-gradle'
 Plug 'davewongillies/vim-i3-syntax'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ekalinin/Dockerfile.vim'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
 Plug 'hashivim/vim-hashicorp-tools'
 Plug 'juliosueiras/vim-terraform-completion'
 Plug 'kchmck/vim-coffee-script'
@@ -89,8 +89,8 @@ Plug 'sophacles/vim-processing'
 Plug 'stevearc/vim-arduino'
 Plug 'tolecnal/icinga2-vim'
 Plug 'tpope/vim-jdaddy'
-Plug 'tpope/vim-markdown'
-Plug 'w0rp/ale'
+Plug 'tpope/vim-markdown', {'do': 'gem install --user mdl'}
+Plug 'w0rp/ale', {'do': 'pip3 install flake8 yapf yamllint'}
 
 " vim-scripts repos
 Plug 'vim-scripts/Align'
