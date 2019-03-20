@@ -44,6 +44,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
 Plug 'rhysd/committia.vim'
 Plug 'KabbAmine/zeavim.vim'
+Plug 'zef/vim-cycle'
 
 " Themes
 Plug 'bling/vim-airline'
