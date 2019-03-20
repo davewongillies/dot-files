@@ -6,7 +6,7 @@
   signingkey = 21499650C3010361395A406EFFE50B78D42FD949
 
 [commit]
-  gpgsign = false
+  gpgsign = true
 
 [core]
   editor = vim
@@ -51,3 +51,6 @@
 
 [url "ssh://git@github.com"]
   insteadOf = https://github.com
+
+[global]
+    basedir = ~/Source/
