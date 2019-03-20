@@ -18,6 +18,9 @@ fish_history
 fish/.config/fish/fundle
 fish/.config/fish/functions
 
+# Fish universal vars
+fish/.config/fish/fish_variables
+
 # systemd
 systemd/.config/systemd/user/default.target.wants
 
