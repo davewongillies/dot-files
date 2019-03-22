@@ -1,3 +1,4 @@
+{{- /* vim: set filetype=gotexttmpl: */ -}}
 [include]
   path = ~/.git/local_config
 
@@ -45,9 +46,9 @@
 [log]
   decorate = auto
   showSignature = false
-
+{{ if ne .chezmoi.osRelease.versionID "18.04" }}
 [gpg]
   program = gpg2
-
+{{- end }}
 [global]
     basedir = ~/Source/
