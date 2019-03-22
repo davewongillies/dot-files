@@ -1,6 +1,7 @@
 LICENSE
 README.md
-home-assistant
+
+bin/stow-to-chezmoi.sh
 
 {{- if ne .chezmoi.os "darwin" }}
 .chunkwmrc
