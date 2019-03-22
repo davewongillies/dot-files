@@ -26,7 +26,7 @@ Plug 'lisongmin/markdown2ctags'
 Plug 'MarcWeber/vim-addon-mw-utils'
 
 " neocompletion
-Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/deoplete.nvim', {'do': 'pip3 install --upgrade --user pynvim '}
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 
@@ -73,7 +73,6 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'KabbAmine/zeavim.vim'
 Plug 'aliou/bats.vim'
 Plug 'dag/vim-fish'
-Plug 'davewongillies/vim-eyaml'
 Plug 'davewongillies/vim-gradle'
 Plug 'davewongillies/vim-i3-syntax'
 Plug 'editorconfig/editorconfig-vim'
@@ -84,13 +83,16 @@ Plug 'juliosueiras/vim-terraform-completion'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mindriot101/vim-yapf'
 Plug 'mzlogin/vim-markdown-toc'
+Plug 'tpope/vim-jdaddy'
+Plug 'tpope/vim-markdown', {'do': 'gem install --user mdl'}
+Plug 'w0rp/ale', {'do': 'pip3 install --upgrade --user flake8 yapf yamllint'}
+
+" Graveyard
+Plug 'davewongillies/vim-eyaml'
 Plug 'rodjek/vim-puppet'
 Plug 'sophacles/vim-processing'
 Plug 'stevearc/vim-arduino'
 Plug 'tolecnal/icinga2-vim'
-Plug 'tpope/vim-jdaddy'
-Plug 'tpope/vim-markdown', {'do': 'gem install --user mdl'}
-Plug 'w0rp/ale', {'do': 'pip3 install flake8 yapf yamllint'}
 
 " vim-scripts repos
 Plug 'vim-scripts/Align'

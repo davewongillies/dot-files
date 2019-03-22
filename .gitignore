@@ -8,22 +8,6 @@
 ### Git ###
 *.orig
 
-# Byte-compiled / optimized / DLL files
-*.py[cod]
-
-# fish-y things
-private.fish
-fishd.*
-fish_history
-fish/.config/fish/fundle
-fish/.config/fish/functions
-
-# Fish universal vars
-fish/.config/fish/fish_variables
-
-# systemd
-systemd/.config/systemd/user/default.target.wants
-
 # home-assistant
 home-assistant/.config/home-assistant/*.conf
 home-assistant/.config/home-assistant/*.db

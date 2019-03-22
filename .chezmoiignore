@@ -1,0 +1,21 @@
+LICENSE
+README.md
+home-assistant
+
+{{- if ne .chezmoi.os "darwin" }}
+.chunkwmrc
+.skhdrc
+{{- end }}
+
+{{- if ne .chezmoi.os "linux" }}
+.Xresources
+bin/i3*
+.config/compton.conf
+.config/i3
+.config/polybar
+.config/rofi
+.config/systemd
+.config/terminator
+{{- end }}
+{{/* vi: ft=gotexttmpl
+*/}}
