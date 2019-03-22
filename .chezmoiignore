@@ -1,3 +1,4 @@
+{{/* vim: set filetype=gotexttmpl: */}}
 LICENSE
 README.md
 
@@ -22,5 +23,3 @@ bin/i3*
 {{- if ne .chezmoi.os "cube" }}
 .config/home-assistant
 {{- end }}
-{{/* vi: ft=gotexttmpl
-*/}}
