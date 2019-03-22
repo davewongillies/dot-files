@@ -17,5 +17,9 @@ bin/i3*
 .config/systemd
 .config/terminator
 {{- end }}
+
+{{- if ne .chezmoi.os "cube" }}
+.config/home-assistant
+{{- end }}
 {{/* vi: ft=gotexttmpl
 */}}
