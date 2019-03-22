@@ -38,7 +38,7 @@ class i3_exit:
         '''
         self.disable_buttons()
         self.status.set_label("Exiting i3, please standby...")
-        os.system("i3-msg exit")
+        os.system("gnome-session-quit --force --logout")
 
     def suspend_action(self, btn):
         self.disable_buttons()

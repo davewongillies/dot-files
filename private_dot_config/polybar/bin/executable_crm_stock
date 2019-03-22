@@ -1,0 +1,5 @@
+#!/bin/bash
+if [ -e ~/Source/personal/stock-sparklines ]; then
+  cd ~/Source/personal/stock-sparklines
+  env POLYBAR=True pipenv run ./get_chart.py
+fi
