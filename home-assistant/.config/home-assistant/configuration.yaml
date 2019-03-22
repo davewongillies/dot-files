@@ -67,6 +67,7 @@ script: !include scripts.yaml
 sensor: !include sensors.yaml
 # Track the sun
 sun:
+switch: !include switches.yaml
 # Text to speech
 tts:
   - platform: google

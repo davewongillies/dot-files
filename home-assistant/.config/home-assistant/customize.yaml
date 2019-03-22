@@ -1,3 +1,25 @@
+---
 device_tracker.android5d6c08bf57ee9365:
   friendly_name: Unknown Android Device
 media_player.daves_desktop: {}
+# For some reason errors out with
+# `extra keys not allowed @ data['customize']['active_media_players']`
+# From https://community.home-assistant.io/t/show-any-currently-active-media-player-on-default-view/23960/4
+group.media_players_active:
+  automation:
+  - alias: Media Update Active Group
+    trigger:
+    - entity_id: sensor.media_players_active
+      platform: state
+    action:
+    - service: group.set
+      data_template:
+        object_id: media_players_active
+        visible: >
+          {{ trigger.to_state.state != '' }}
+        entities: >
+          {% if trigger.to_state.state != '' %}
+            {{ trigger.to_state.state }}
+          {% else %}
+            {{ states.group.media_players_active.entity_id }}
+          {% endif %}

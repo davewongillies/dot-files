@@ -1,7 +1,21 @@
 ---
+# default_view:
+#   view: yes
+#   name: Home
+#   entities:
+#     - weather.openweathermap
+#     - sun.sun
+#     - zone.home
+#     - weblink.pihole
 media:
   view: yes
   name: Media
   entities:
+    - media_player.back_rooms
+    - media_player.bathroom
     - media_player.bedroom_boom
     - media_player.daves_desktop
+    - media_player.kitchen_speaker
+    - media_player.sony_bravia_tv
+    - media_player.study
+    - media_player.tv_speakers
