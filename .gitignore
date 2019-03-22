@@ -18,3 +18,5 @@ home-assistant/.config/home-assistant/.uuid
 home-assistant/.config/home-assistant/known_devices.yaml
 home-assistant/.config/home-assistant/secrets.yaml
 home-assistant/.config/home-assistant/weblinks.yaml
+
+.envrc
