@@ -22,4 +22,5 @@ bin/i3*
 
 {{- if ne .chezmoi.os "cube" }}
 .config/home-assistant
+.config/systemd
 {{- end }}
