@@ -1,54 +1,102 @@
-;=====================================================
-;
-;   To learn more about how to configure Polybar
-;   go to https://github.com/jaagr/polybar
-;
-;   The README contains alot of information
-;
-;=====================================================
+[settings]
+; Reload upon receiving XCB_RANDR_SCREEN_CHANGE_NOTIFY events
+screenchange-reload = false
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+;------------------------------------------------------------------------------;
+;                                C O L O U R S                                 ;
+;------------------------------------------------------------------------------;
+[solarized]
+
+; Solarized colours: https://ethanschoonover.com/solarized/
+base03 = #002b36
+base02 = #073642
+base01 = #586e75
+base00 = #657b83
+base0  = #839496
+base1  = #93a1a1
+base2  = #eee8d5
+base3  = #fdf6e3
+yellow = #b58900
+orange = #cb4b16
+red    = #d30102
+magenta= #d33682
+violet = #6c71c4
+blue   = #268bd2
+cyan   = #2aa198
+green  = #859900
 
 [colors]
-background = #002b36
-background-alt = #586e75
+background = ${solarized.base03}
+background-alt = ${solarized.base01}
 
-foreground = #dfdfdf
-foreground-alt = #555
+foreground = ${solarized.base2}
+foreground-alt = ${solarized.base3}
 
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
 
+;------------------------------------------------------------------------------;
+;                                   B A R S                                    ;
+;------------------------------------------------------------------------------;
+
 [bar/default]
+dpi-x = 0
+dpi-y = 0
 width = 100%
-; height = 27
+height = 27
 radius = 0
 fixed-center = false
 background = ${colors.background}
 foreground = ${colors.foreground}
-; line-size = 2
+line-size = 0
 line-color = #f00
 border-size = 0
 border-color = #00000000
 padding = 0
 
-font-0 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
-font-1 = FontAwesome:size=12;2
-font-2 = FantasqueSansMonoNerdFont:size=12:antialias=false;1
+font-0 = FantasqueSansMonoNerdFontMono:size=13:antialias=true;0
+font-1 = FantasqueSansMonoNerdFontMono:size=13:antialias=true;1
+font-2 = FantasqueSansMonoNerdFontMono:size=13:antialias=true;1
 
 module-margin = 1
 
 modules-left = my-text i3
 modules-center = 
-modules-right = crm volume memory filesystem loadavg temperature weather battery date
+modules-right = crm volume memory filesystem loadavg temperature weather pollen battery date
+; modules-right = crm volume memory filesystem loadavg temperature weather battery date
 
 wm-restack = i3
 override-redirect = false
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
 
+tray-position = right
+tray-padding = 2
+tray-transparent = false
+tray-detached = false
+
 [bar/HDMI-1]
 monitor = HDMI-1
 monitor-fallback = LVDS-1
+inherit = bar/default
+
+
+[bar/eDP-1]
+monitor = eDP-1
+tray-position = right
+tray-padding = 2
+tray-transparent = false
+tray-detached = false
+tray-maxsize = 24
+height = 48
+font-0 = FantasqueSansMonoNerdFontMono:size=18:antialias=true;0
+font-1 = FantasqueSansMonoNerdFontMono:size=30:antialias=true;8
+font-2 = FantasqueSansMonoNerdFontMono:size=18:antialias=true;0
 inherit = bar/default
 
 [bar/LVDS-1]
@@ -80,6 +128,62 @@ tray-padding = 2
 tray-transparent = false
 tray-detached = false
 
+;------------------------------------------------------------------------------;
+;                           D E C O R A T I O N S                              ;
+;------------------------------------------------------------------------------;
+[module/arrowi3]
+type = custom/text
+content = " "
+content-font = 2
+content-foreground = ${colors.foreground}
+content-background = ${colors.background}
+
+[module/arrowtitle]
+type = custom/text
+content = " "
+content-foreground = ${colors.black}
+content-background = ${colors.background}
+
+[module/arrowkeyboard]
+; grey to bg
+type = custom/text
+content = " "
+content-foreground = ${colors.violet}
+content-background = ${colors.black}
+
+[module/arrowvolume]
+type = custom/text
+content = " "
+content-foreground = #02bdff
+content-background = ${colors.violet}
+
+[module/arrowcpu]
+; grey to bg
+type = custom/text
+content = ""
+content-foreground = #029dff
+content-background = #02bdff
+
+[module/arrowmemory]
+; bg to grey
+type = custom/text
+content = " "
+content-font = 2
+content-foreground = #027dff
+content-background = #0f9dff
+
+[module/arrowdate]
+; grey to bg
+type = custom/text
+content = " "
+content-font = 2
+content-foreground = #024dff
+content-background = #027dff
+
+;------------------------------------------------------------------------------;
+;                               M O D U L E S                                  ;
+;------------------------------------------------------------------------------;
+
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:80:...%
@@ -90,15 +194,12 @@ blacklist-0 = num lock
 
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-underline = ${colors.secondary}
 
 label-layout = %layout%
-label-layout-underline = ${colors.secondary}
 
 label-indicator-padding = 2
 label-indicator-margin = 1
 label-indicator-background = ${colors.secondary}
-label-indicator-underline = ${colors.secondary}
 
 [module/filesystem]
 type = internal/fs
@@ -109,25 +210,6 @@ mount-0 = /
 label-mounted =  %mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
-
-[module/bspwm]
-type = internal/bspwm
-
-label-focused = %index%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
-label-focused-padding = 2
-
-label-occupied = %index%
-label-occupied-padding = 2
-
-label-urgent = %index%!
-label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
-
-label-empty = %index%
-label-empty-foreground = ${colors.foreground-alt}
-label-empty-padding = 2
 
 [module/i3]
 type = internal/i3
@@ -144,36 +226,31 @@ label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
 label-focused = %index%
-; label-focused = %icon%
-label-focused-background = ${module/bspwm.label-focused-background}
-label-focused-underline = ${module/bspwm.label-focused-underline}
-label-focused-padding = ${module/bspwm.label-focused-padding}
+label-focused-background = ${colors.background-alt}
+label-focused-padding = 2
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
 ; label-unfocused = %icon%
-label-unfocused-padding = ${module/bspwm.label-occupied-padding}
+label-unfocused-padding = 2
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %index%
 ; label-visible = %icon%
 label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint set
 label-urgent = %index%
 ; label-urgent = %icon%
-label-urgent-background = ${module/bspwm.label-urgent-background}
-label-urgent-padding = ${module/bspwm.label-urgent-padding}
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 
 
-; ws-icon-0 = -1;⚀
-; ws-icon-1 = 2;⚁
-; ws-icon-2 = 3;⚂
-; ws-icon-3 = 4;⚃
-; ws-icon-4 = 5;⚄
-; ws-icon-5 = 6;⚅
-
+; Separator in between workspaces
+; label-separator = 
+; label-separator-font = 2
+; label-separator-padding = 0
+; label-separator-foreground = ${colors.background-alt}
 
 [module/mpd]
 type = internal/mpd
@@ -215,14 +292,12 @@ type = internal/cpu
 interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #f90000
 label = %percentage%%
 
 [module/memory]
 type = internal/memory
 interval = 2
 format-prefix = " "
-format-underline = #4bffdc
 label = %gb_free%
 
 [module/wlan0]
@@ -231,7 +306,6 @@ interface = wlan0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
-format-connected-underline = #9f78e1
 label-connected = %essid%
 
 format-disconnected =
@@ -251,7 +325,6 @@ interval = 3.0
 
 ; format-connected = <ramp-signal> <label-connected>
 format-connected =  <label-connected>
-format-connected-underline = #9f78e1
 label-connected = %essid%
 
 format-disconnected =
@@ -268,7 +341,6 @@ type = internal/network
 interface = eno1
 interval = 3.0
 
-format-connected-underline = #55aa55
 format-connected =  <label-connected>
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
@@ -276,37 +348,21 @@ label-connected = %local_ip%
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
-
-[module/time]
-type = internal/date
-interval = 5
-
-date = ""
-date-alt = " %Y-%m-%d"
-
-time = " %r"
-time-alt = " %r"
-
-format-underline = #0a6cf5
-
-label = "%date% %time% "
 
 [module/date]
 type = internal/date
 interval = 5
 
-date = "%{A1:sensible-browser "https\://calendar.google.com":}%{A} %Y-%m-%d"
-date-alt = " %Y-%m-%d"
+date = 
+date-alt = " %Y-%m-%d "
 
-time = " %r"
-time-alt = %H:%M:%S
+time = "%r"
+time-alt = " %H:%M:%S"
 
-format-underline = #0a6cf5
 
-label = "%date% %time% "
+label = "%date%%time%"
 
 [module/volume]
 type = internal/volume
@@ -325,23 +381,6 @@ ramp-volume-0 = 
 ramp-volume-1 = 
 ramp-volume-2 = 
 
-bar-volume-width = 5
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
-
 [module/temperature]
 type = internal/temperature
 thermal-zone = 0
@@ -349,9 +388,7 @@ warn-temperature = 60
 
 ; format-prefix = ""
 format = <ramp> <label>
-format-underline = #f50a4d
 format-warn = <ramp> <label-warn>
-format-warn-underline = ${self.format-underline}
 
 label = %temperature%
 label-warn = %temperature%
@@ -388,17 +425,6 @@ menu-2-0 = power off
 menu-2-0-exec = sudo poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
-
-[settings]
-screenchange-reload = true
-;compositing-background = xor
-;compositing-background = screen
-;compositing-foreground = source
-;compositing-border = over
-
-[global/wm]
-margin-top = 5
-margin-bottom = 5
 
 [module/battery]
 type = internal/battery
@@ -450,49 +476,36 @@ animation-charging-framerate = 750
 type = custom/script
 exec = cut -d' ' -f1 /proc/loadavg
 format-prefix = " "
-format-underline = #f90000
-click-left = gnome-system-monitor
 
 [module/gpmdp]
-format-prefix = 
-format-suffix = "  "
-format-background = #586e75
-format-foreground = #002b36
-; background = #002b36
-; background-alt = #586e75
-
-; foreground = #dfdfdf
-; foreground-alt = #555
-
-; format-suffix-background = 
-; format-prefix-background = 
-; format-background = 
 type = custom/script
-exec = ~/.config/polybar/bin/playing
+exec = ~/bin/playing.sh
 tail = true
-click-left = ~/.config/polybar/bin/gpmdp
-; scroll-up =
-;; scroll-down =
 
 [module/weather]
 type = custom/script
-exec = ~/.config/polybar/bin/weather
-format-prefix = " "
+exec = fish -c ~/.config/polybar/bin/weather
 interval = 600
-click-left = sensible-browser https://darksky.net
+content-padding = 0
 
 [module/my-text]
 type = custom/text
+content-font = 2
 content = " "
 content-padding = 0
-click-left = rofi -show combi -modi combi
 
 [module/crm]
 type = custom/script
-exec = ~/.config/polybar/bin/crm_stock
+format-prefix = " CRM "
+exec = curl -s https://api.iextrading.com/1.0/stock/crm/price
 interval = 300
-format-underline = #009edb
-; click-left = echo left %counter%
 click-left = sensible-browser https://iextrading.com/apps/stocks/CRM
+
+[module/pollen]
+type = custom/script
+exec = fish -c 'cd ~/Source/python-pollen ; make'
+interval = 3600
+click-left = sensible-browser https://www.pollen.com/forecast/current/pollen/94118
+content-padding = 0
 
 ; vim:ft=dosini

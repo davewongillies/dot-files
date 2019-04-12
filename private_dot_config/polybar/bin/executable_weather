@@ -7,20 +7,63 @@ except ImportError as e:
     print(e)
     exit(1)
 
+try:
+    API_KEY = os.environ['OPENWEATHER_API_KEY']
+except KeyError:
+    print('No OPENWEATHER_API_KEY env var found')
+
 city = 'San Francisco'
 units = 'Metric'
 unit_key = 'C'
 
+
+def icon(condition):
+    """
+    Day icon  Night icon  Description
+    01d       01n         clear sky
+    02d       02n         few clouds
+    03d       03n         scattered clouds
+    04d       04n         broken clouds
+    09d       09n         shower rain
+    10d       10n         rain
+    11d       11n         thunderstorm
+    13d       13n         snow
+    50d       50n         mist
+    """
+    icon = {
+        '01d': '',  # day clear sky
+        '02d': '',  # day few clouds
+        '03d': '',  # day scattered clouds
+        '04d': '',  # day broken clouds
+        '09d': '',  # day shower rain
+        '10d': '',  # day rain
+        '11d': '',  # day thunderstorm
+        '13d': '',  # day snow
+        '50d': '',  # day mist
+        '01n': '',  # night clear sky
+        '02n': '',  # night few clouds
+        '03n': '',  # night scattered clouds
+        '04n': '',  # night broken clouds
+        '09n': '',  # night shower rain
+        '10n': '',  # night rain
+        '11n': '',  # night thunderstorm
+        '13n': '',  # night snow
+        '50n': ''   # night mist
+     }
+    return icon[condition]
+
+
 @retry(wait_fixed=10000)
 def get_weather(city, units, unit_key):
-    try:
-        api_key = os.environ['OPENWEATHER_API_KEY']
-        api_url = 'http://api.openweathermap.org/data/2.5/weather'
-        weather = eval(str(urllib.request.urlopen("{}?q={}&APPID={}&units={}".format(api_url, city, api_key, units)).read())[2:-1])
-        temp = int(float(weather['main']['temp']))
-        print("{}°{}".format(temp, unit_key))
+    api_url = 'http://api.openweathermap.org/data/2.5/weather'
+    weather = eval(
+        str(
+            urllib.request.urlopen("{}?q={}&APPID={}&units={}".format(
+                api_url, city, API_KEY, units)).read())[2:-1])
 
-    except KeyError:
-        print('No OPENWEATHER_API_KEY env var found')
+    weather_icon = icon(weather['weather'][0]['icon'])
+    temp = int(float(weather['main']['temp']))
+    print("{} {}°{}".format(weather_icon, temp, unit_key))
+
 
 get_weather(city, units, unit_key)
