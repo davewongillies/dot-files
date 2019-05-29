@@ -154,6 +154,8 @@ set tabstop=4
 " Use ; rather than : for commands
 noremap ; :
 noremap , ;
+let mapleader="\<Space>"
+
 
 augroup filetypes
   autocmd FileType python    setlocal smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
@@ -166,6 +168,7 @@ augroup filetypes
   autocmd FileType python autocmd BufWritePre <buffer> :Yapf
   autocmd FileType rego autocmd BufWritePre <buffer> :!opa fmt
 augroup END
+
 " === Syntax settings ========================================================
 " Syntax highlighting
 if has('syntax')
@@ -176,6 +179,11 @@ if has('syntax')
   let g:ale_sign_error = ''
   let g:ale_sign_warning = ''
 endif
+
+" === Terminal =============
+set splitbelow
+set termwinsize=20x0
+command Fish terminal ++close fish
 
 " === Key Mappings ===========================================================
 " ctrl-t movement for tabs
@@ -198,7 +206,9 @@ map <C-b> :let &background = ( &background == "dark"? "light" : "dark" )<cr>
 " map <C-a>a :Align =><cr>
 nmap <F1> <nop>
 map <C-t>t :TagbarToggle<cr>
+map <leader>t :TagbarToggle<cr>
 
+nnoremap <leader><cr> :Fish<cr>
 
 " === Airline ================================================================
 let g:airline_theme='powerlineish'
@@ -226,6 +236,8 @@ set list listchars=trail:.,precedes:«,extends:»,eol:↲,tab:\░\░
 " === NERDTree ===============================================================
 " toggle NERDTree
 map <C-n> :NERDTreeToggle<cr>
+map <leader>n :NERDTreeToggle<cr>
+
 let g:NERDTreeShowHidden = 0
 " Open NERDTree on startup
 "
@@ -314,9 +326,3 @@ augroup badwords
     autocmd InsertEnter *.md call HiBadWords()
     autocmd InsertLeave *.md call HiBadWords()
 augroup END
-
-" === Terminal =============
-set splitbelow
-set termwinsize=20x0
-
-command Fish terminal ++close fish
