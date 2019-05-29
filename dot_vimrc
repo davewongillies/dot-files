@@ -85,6 +85,7 @@ Plug 'mindriot101/vim-yapf'
 Plug 'mzlogin/vim-markdown-toc'
 Plug 'tpope/vim-jdaddy'
 Plug 'tpope/vim-markdown', {'do': 'gem install --user mdl'}
+Plug 'tsandall/vim-rego'
 Plug 'w0rp/ale', {'do': 'pip3 install --upgrade --user flake8 yapf yamllint'}
 
 " Graveyard
@@ -162,6 +163,8 @@ augroup filetypes
 
   " Delete any whitespace at end of lines
   autocmd FileType json,sh,eruby,spec,c,cpp,python,ruby,java,yaml,javascript,html,css,coffee,haml,php,puppet,terraform autocmd BufWritePre <buffer> :%s/\s\+$//e
+  autocmd FileType python autocmd BufWritePre <buffer> :Yapf
+  autocmd FileType rego autocmd BufWritePre <buffer> :!opa fmt
 augroup END
 " === Syntax settings ========================================================
 " Syntax highlighting
@@ -315,3 +318,5 @@ augroup END
 " === Terminal =============
 set splitbelow
 set termwinsize=20x0
+
+command Fish terminal ++close fish
