@@ -1,1 +1,0 @@
-/home/dgillies/.vimrc

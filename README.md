@@ -6,9 +6,8 @@ My collection of personal dot files.
 
 ## Installing dot files
 
-Use [GNU Stow](https://www.gnu.org/software/stow/) to install files are required.
-For example:
+Use [chezmoi](https://github.com/twpayne/chezmoi) to install the dot files:
 
 ```
-$ stow -t ~ vim
+$ chezmoi apply -v
 ```

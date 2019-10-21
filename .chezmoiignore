@@ -1,0 +1,26 @@
+{{/* vim: set filetype=gotexttmpl: */}}
+LICENSE
+README.md
+
+bin/stow-to-chezmoi.sh
+
+{{- if ne .chezmoi.os "darwin" }}
+.chunkwmrc
+.skhdrc
+{{- end }}
+
+{{- if ne .chezmoi.os "linux" }}
+.Xresources
+bin/i3*
+.config/compton.conf
+.config/i3
+.config/polybar
+.config/rofi
+.config/systemd
+.config/terminator
+{{- end }}
+
+{{- if ne .chezmoi.os "cube" }}
+.config/home-assistant
+.config/systemd
+{{- end }}

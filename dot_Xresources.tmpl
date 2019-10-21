@@ -1,0 +1,27 @@
+{{- /* vim: set filetype=gotexttmpl: */ -}}
+! ------------------------------------------------------------------------------
+! ROFI Color theme
+! ------------------------------------------------------------------------------
+rofi.color-enabled: true
+rofi.color-window: #002b37, #002b37, #003642
+rofi.color-normal: #002b37, #819396, #003643, #008ed4, #ffffff
+rofi.color-active: #002b37, #008ed4, #003643, #008ed4, #66c6ff
+rofi.color-urgent: #002b37, #da4281, #003643, #008ed4, #890661
+
+{{ if eq .chezmoi.hostname "mixxx" -}}
+i3wm.head_left: LVDS-1
+i3wm.head_right: LVDS-1
+{{ else if eq .chezmoi.hostname "dgillies-wsl1" -}}
+i3wm.head_right: DP-1.1.8
+i3wm.head_left: DP-1.8
+{{ else if eq .chezmoi.hostname "darkenergy" -}}
+Xautolock.cornerdelay: 1
+Xautolock.cornerredelay: 10
+Xautolock.time: 3
+Xautolock.resetsaver: true
+Xautolock.detectsleep: true
+Xautolock.locker: ~/bin/i3lock.sh xautolock
+
+! Top right means no lock, bottom right means lock now
+! Order top left, top right, bottom left,  bottom  right.
+Xautolock.corners: 00+-{{ end }}

@@ -1,6 +1,0 @@
-#!/bin/bash
-SLEEP=15
-while true; do
-    ~/.config/polybar/bin/playing.py --layout t-A-a
-    sleep $SLEEP
-done
